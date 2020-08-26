@@ -1,8 +1,15 @@
 # Schulwoche 2
+##### 17. August - 23. August
+
+<br>
+<br>
+<br>
+
+## Docker Aufträge
 
 ### A1: Hello World ausführen
 
-#### A1.1: Führen Sie den Hello World-Container aus
+#### Führen Sie den Hello World-Container aus
 
 __Eingabe__
 ```bash
@@ -41,12 +48,16 @@ For more examples and ideas, visit:
 
 <br>
 
-#### A1.2: Bringen Sie einen Wahl dazu, Ihren Namen zu sagen
+#### Bringen Sie einen Wahl dazu, Ihren Namen zu sagen
 
+
+__Eingabe__
 ```
  docker run docker/whalesay cowsay joschija
  ```
 
+
+__Ausgabe__
  ```
  __________
 < joschija >
@@ -64,11 +75,19 @@ For more examples and ideas, visit:
          \____\______/   
 ```
 
-### A2:
+<br>
+<br>
+
+
+### A2: Docker-Hub -> mysql-Container
+
+#### Installation MySQL
+__Eingabe__
 ```
 docker pull mysql
 ```
 
+__Ausgabe__
 ```
 Using default tag: latest
 latest: Pulling from library/mysql
@@ -88,12 +107,15 @@ Digest: sha256:c358e72e100ab493a0304bda35e6f239db2ec8c9bb836d8a427ac34307d074ed
 Status: Downloaded newer image
 ```
 
+<br>
 
+#### Docker images anzeigen
+__Eingabe__
 ```
 docker images
 ```
 
-
+__Ausgabe__
 ```
 REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
 docsify-starter_docsify    latest              46f341a5da0f        6 days ago          899MB
@@ -104,13 +126,15 @@ hello-world                latest              bf756fb1ae65        7 months ago 
 docker/whalesay            latest              6b362a9f73eb        5 years ago         247MB
 ```
 
+<br>
 
-
+#### MySQL inklusive passwort starten
+__Eingabe__
 ```
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=test mysql:latest
 ```
 
-
+__Ausgabe__
 ```
 2020-08-20 07:45:47+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.21-1debian10 started.
 2020-08-20 07:45:48+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
@@ -119,13 +143,19 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=test mysql:latest
 	You need to specify one of MYSQL_ROOT_PASSWORD, MYSQL_ALLOW_EMPTY_PASSWORD and MYSQL_RANDOM_ROOT_PASSWORD
 ```
 
-### A3
+<br>
+<br>
 
+### A3:  Images listen
+
+#### Listen Sie alle Images auf Ihrem System auf
+
+__Eingabe__
 ```
 docker images
 ```
 
-
+__Ausgabe__
 ```
 REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
 docsify-starter_docsify    latest              46f341a5da0f        6 days ago          899MB
@@ -136,29 +166,153 @@ hello-world                latest              bf756fb1ae65        7 months ago 
 docker/whalesay            latest              6b362a9f73eb        5 years ago         247MB
 ```
 
-### A4
+<br>
+<br>
 
+### A4 Container listen
+
+#### Listen Sie alle laufenden Images auf Ihrem System auf
+
+__Eingabe__
 ```
 docker ps
+```
+
+<br>
+
+#### Listen Sie alle Container (laufend oder nicht) auf Ihrem System auf
+
+__Eingabe__
+```
+docker ps -a
 ```
 
 ```
 docker container ls
 ```
 
+
+__Ausgabe__
 ```
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                 NAMES
 1aa9a378abe4        mysql:latest        "docker-entrypoint.s…"   3 minutes ago       Up 3 minutes        3306/tcp, 33060/tcp   mysql
 ```
 
-Stopen:
+<br>
+
+#### Stopen eines images
+
+__Eingabe__
 
 ```
 docker stop 1aa9a378abe4
 ````
 
-### A5
+<br>
+<br>
 
+### A5: Container “interaktiv” laufen lassen
+
+#### Starten Sie den MySQL-Container “interaktiv” und loggen Sie sich auf dem Container über die bash ein
+
+__Eingabe__
 ```
 docker run -i --name mysql -e MYSQL_ROOT_PASSWORD=test mysql:latest /bin/bash
 ```
+
+<br>
+<br>
+<br>
+
+## Programmieraufträge
+
+### Auftrag 1:
+
+__Gegeben__
+```
+Gegeben ist der Array aus den Werten 3,7,5,1,8,13,2.
+```
+
+
+__Aufgabe__
+```
+Erstellen Sie ein PHP-Script welches die Werte aus dem Array in einer
+HTML-Tabelle ausgibt.
+```
+
+
+<br>
+
+#### PHP File - ausgabe.php
+
+```php
+require_once __DIR__.'/bootstrap.php';
+
+// Create a product list
+$nummbers = [
+    [
+        'zahl'          => 3,
+    ],
+    [
+        'zahl'          => 7,
+    ],
+    [
+        'zahl'          => 5,
+    ],
+    [
+        'zahl'          => 1,
+    ],
+    [
+        'zahl'          => 8,
+    ],
+    [
+        'zahl'          => 13,
+    ],
+    [
+        'zahl'          => 2,
+    ],
+];
+
+// Render our view
+echo $twig->render('ausgabe.html', ['nummbers' => $nummbers] );
+```
+
+<br>
+
+#### HTML File - ausgabe.html
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Twig Example</title>
+    </head>
+    <body>
+    <table border="1" style="width: 80%;">
+        <thead>
+            <tr>
+                <td>Zahl</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for nummber in nummbers %}
+                <tr>
+                    <td>{{ nummber.zahl }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </body>
+</html>
+```
+
+<br>
+
+#### Aufbau Docker
+<img width="40%" src='./bilder/pauftrag1_1.jpeg'></img>
+
+<br>
+
+#### Browser
+<img width="70%" src='./bilder/pauftrag1_2.jpeg'></img>
