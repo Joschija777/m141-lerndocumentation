@@ -243,6 +243,11 @@ HTML-Tabelle ausgibt.
 
 <br>
 
+### Aufbau Docker:
+<img width="40%" src='./bilder/aufbau.png'></img>
+
+<br>
+
 #### PHP File - ausgabe.php
 
 ```php
@@ -309,10 +314,9 @@ echo $twig->render('ausgabe.html', ['nummbers' => $nummbers] );
 
 <br>
 
-#### Aufbau Docker
-<img width="40%" src='./bilder/pauftrag1_1.jpeg'></img>
+
 
 <br>
 
-#### Browser
-<img width="70%" src='./bilder/pauftrag1_2.jpeg'></img>
+### Browser:
+<img width="80%" src='./bilder/pauftrag1_2.jpeg'></img>
