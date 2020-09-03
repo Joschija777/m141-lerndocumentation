@@ -1,6 +1,8 @@
 # Schulwoche 1
 ##### 10. August - 16. August
 
+
+
 <br>
 
 ## Was ist Container-Virtualisierung?
@@ -9,6 +11,7 @@
 Containervirtualisierung ist eine Methode, um mehrere Instanzen eines Betriebssystems isoliert voneinander auf einem Hostsystem zu betreiben. Im Gegensatz zur Virtualisierung mittels eines Hypervisors hat Containervirtualisierung zwar einige Einschränkungen in der Art ihrer Gäste, gilt aber als besonders ressourcenschonend.
 
 <br>
+
 
 
 ## Wofür wird Docker verwendet?

@@ -5,6 +5,47 @@
 <br>
 <br>
 
+## Array
+
+### Assozative Arrays
+Bei großen Arrays wird es irgendwann umständlich zu wissen, welche Nummer/Index zu welchem Wert gehört, darum gibt es assoziative Arrays. Das heißt, man kann für einen Wert einen Schlüssel (auch Key genannt) zuweisen, dies kann z.B. eine andere Zeichenkette sein. Die Zuweisung erfolgt per =>
+
+```php
+$namen = array(
+"jg" => "Joschija Gruss",
+"ss" => "Stefan Schmid",
+"dg" => "Domenik Gafner");
+
+echo $namen["jg"];
+```
+
+
+__Ausgabe__
+
+```
+Joschija Gruss
+```
+
+<br>
+
+### Arrays in Strings konvertieren
+Eine sehr nützliche Funktion ist implode($trennzeichen, $array) . Hiermit könnt ihr die Elemente eines Arrays zu einem String verbinden. Mittels der Variable $trennzeichen könnt ihr spezifizieren, welches Verbindungselement zwischen den Elementen erscheinen soll. Diese Funktion ist sehr nützlich, um so z.B. formatierte Listen auszugeben.
+
+```php
+$namen = array("Januar", "Februar", "Maerz", "April");
+$namenStr = implode(", ", $namen);
+echo $namenStr;
+```
+
+__Ausgabe__
+
+```
+Januar, Februar, März, April, Mai
+```
+
+<br>
+<br>
+
 ## Programmieraufträge
 ### Auftrag 2:
 
@@ -269,40 +310,59 @@ $bemerkung = $_POST["message"];
 <br>
 <br>
 
-## Array
+## Tipps Formulare
 
-### Assozative Arrays
-Bei großen Arrays wird es irgendwann umständlich zu wissen, welche Nummer/Index zu welchem Wert gehört, darum gibt es assoziative Arrays. Das heißt, man kann für einen Wert einen Schlüssel (auch Key genannt) zuweisen, dies kann z.B. eine andere Zeichenkette sein. Die Zuweisung erfolgt per =>
-
-```php
-$namen = array(
-"jg" => "Joschija Gruss",
-"ss" => "Stefan Schmid",
-"dg" => "Domenik Gafner");
-
-echo $namen["jg"];
-```
-
-
-__Ausgabe__
+### Überprüfen von Variablen
 
 ```
-Joschija Gruss
+isset (Variable) // true / false
+// Überprüft, ob eine Variable vorhanden ist
+```
+
+```
+empty (Variable) // true / false
+// Überprüft, ob eine Variable keinen Inhalt hat
 ```
 
 <br>
 
-### Arrays in Strings konvertieren
-Eine sehr nützliche Funktion ist implode($trennzeichen, $array) . Hiermit könnt ihr die Elemente eines Arrays zu einem String verbinden. Mittels der Variable $trennzeichen könnt ihr spezifizieren, welches Verbindungselement zwischen den Elementen erscheinen soll. Diese Funktion ist sehr nützlich, um so z.B. formatierte Listen auszugeben.
+#### Beispeil
+
+__Formular - 2 Buttons__
+```html
+<table>
+      <tr><td>Erste Zahl:</td><td><input type="text" name="zahl1"></td></tr
+      <tr><td>Zweite Zahl:</td><td><input type="text" name="zahl2"></td></t
+      <tr><td><input type="submit" name="mal" value="Zahlen multiplizieren"
+      <td><input type="submit" name="plus" value="Zahlen addieren"></td></t
+</table>
+```
+__PHP - isset__
 
 ```php
-$namen = array("Januar", "Februar", "Maerz", "April");
-$namenStr = implode(", ", $namen);
-echo $namenStr;
+echo "<h3>Rechenergebnis</h3>";
+if (isset($_POST["mal"]))
+{
+$ergebnis = $_POST["zahl1"] * $_POST["zahl2"];
+echo $_POST["zahl1"] ." mal " .$_POST["zahl2"] . " ist gleich $ergebn
+}
+if (isset($_POST["plus"]))
+{
+$ergebnis = $_POST["zahl1"] + $_POST["zahl2"];
+echo $_POST["zahl1"] ." plus " .$_POST["zahl2"] . " ist gleich $ergeb
+}
 ```
 
-__Ausgabe__
+<br>
+
+### POST Testen
 
 ```
-Januar, Februar, März, April, Mai
+print_r ($_POST)
+// Zeigt den Inhalt einer Variable in lesbarer Form
+```
+
+```
+var_dump ($_POST)
+// Zeigt den Inhalt mehrerer Variablen in lesbarer Form ganz detaillier
 ```
