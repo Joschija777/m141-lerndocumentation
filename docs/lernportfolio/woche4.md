@@ -15,6 +15,7 @@
 actor Joschija
 participant WebBrowser
 participant WebServer
+participant JSON
 
 
 Joschija -> WebBrowser : Webbrowser öffnen
@@ -23,6 +24,10 @@ WebBrowser -> WebServer : HTTP/POST - index.html
 activate WebServer
 WebServer -> WebBrowser : Browser lädt Javascript... herunter
 deactivate WebServer
+WebBrowser -> JSON : zB. addButton (ajax js daten anfordern)
+activate JSON
+JSON -> WebBrowser : z.B Tabelle generieren
+deactivate JSON
 WebBrowser -> WebBrowser : Browser führt Reaktionen aus (Rendern)
 WebBrowser -> Joschija : Seite ist jetzt sichtbar und interaktiv
 deactivate WebBrowser
@@ -30,6 +35,7 @@ deactivate WebBrowser
 @enduml
 
 ```
+
 <br>
 
 #### Vorteile:
