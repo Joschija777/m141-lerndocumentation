@@ -28,6 +28,45 @@
 (file_get_contents)
 (file_put_contents)
 
+(Object-Orientrietes-Programmieren) as (OOP)
+(Zugriffsmodifizierer)
+($public)
+($private)
+($protectet)
+(Konstruktor)
+(Instanz)
+(Vererbung)
+(Model-View-Controller) as (MVC)
+(Model)
+(View)
+(Controller)
+
+
+
+
+(Zugriffsmodifizierer) <--- ($public)
+(Zugriffsmodifizierer) <--- ($protectet)
+(Zugriffsmodifizierer) <--- ($private)
+(Zugriffsmodifizierer) ---> (OOP)
+(Zugriffsmodifizierer) ---> (Vererbung)
+(Zugriffsmodifizierer) <--> (Instanz)
+(Zugriffsmodifizierer) <--> (Konstruktor)
+
+(OOP) <--> (PHP)
+(MVC) <--- (Model)
+(MVC) <--- (View)
+(MVC) <--- (Controller)
+(MVC) <--> (OOP)
+(MVC) <--> (PHP)
+(Vererbung) ---> (OOP)
+(Instanz) ---> (OOP)
+(Instanz) <--> (Konstruktor)
+(Konstruktor) ---> (OOP)
+(Methoden) ---> (OOP)
+(Funktionen) ---> (OOP)
+(MVC) <--> (HTML)
+
+
 
 
 
@@ -76,7 +115,70 @@
 
 
 
+note right of (OOP)
+ Durch das Abbilden eurer Anwendung in
+ Klassen schafft ihr Struktur und könnt
+ Funktionalitäten kapseln.
+end note
 
+
+note right of (Zugriffsmodifizierer)
+  Durch unterschiedliche Sichtbarkeiten könnt ihr
+  kontrollieren, wer zugriff auf eine Eigenschaft
+  oder eine Methode hat.
+end note
+
+note right of ($private)
+  Der restriktivste Typ. Nur innerhalb der Klasse
+  kann auf solche Variablen und Methoden zugegriffen
+  werden.
+end note
+
+note right of ($protectet)
+  Auf die Variable oder Methode kann nur innerhalb
+  der Klasse und in vererbten Klassen zugegriffen werden.
+end note
+
+note right of ($public)
+  Public bedeutet Vollzugriff, jeder kann auf diese
+  Variable oder Methode zugreifen.
+end note
+
+note right of (Instanz)
+  Mittels Instanz werden neue Objekte einer Klassen
+  erzeugt.
+end note
+
+note right of (Konstruktor)
+  Mit dem Konstruktor kann man Attribute schon Bei
+  der Instanzierung mitgeben.
+end note
+
+note right of (Vererbung)
+  Mittels Vererbung könnt ihr verschiedene
+  Hierarchiestufen in euren Klassen ermöglichen.
+end note
+
+note right of (MVC)
+  Model-View-Controller (MVC) bedeutet vor
+  allem die Trennung von Aufgaben.
+end note
+
+note right of (Model)
+  Das Model hat die Aufgabe, die Webanwendung mit
+  Daten aus der Datenbank (oder von wo auch immer)
+  zu versorgen und die Daten, wenn gewünscht, zu speichern.
+end note
+
+note right of (View)
+  Die View beinhaltet die Verwaltung der Templates,
+  und generiert die HTML-Ausgabe.
+end note
+
+note right of (Controller)
+  Der Kontroller entscheidet, was mit den übergebenen
+  Parametern anzufangen ist, und steuert die Anwendung
+end note
 
 
 
@@ -202,3 +304,34 @@ note "Methoden sind Funktionen, \n die innerhalb einer \n Klasse verwendet werde
 nMethoden .. (Funktionen)
 
 @enduml
+
+```
+
+
+```plantuml
+
+@startuml
+
+actor Joschija
+participant WebBrowser
+participant WebServer
+participant JSON
+
+
+Joschija -> WebBrowser : Webbrowser öffnen
+activate WebBrowser
+WebBrowser -> WebServer : HTTP/POST - index.html
+activate WebServer
+WebServer -> WebBrowser : Browser lädt Javascript... herunter
+deactivate WebServer
+activate JSON
+WebBrowser -> JSON : zB. addButton (ajax js daten anfordern)
+JSON -> WebBrowser : z.B Tabelle generieren
+deactivate JSON
+WebBrowser -> WebBrowser : Browser führt Reaktionen aus (Rendern)
+WebBrowser -> Joschija : Seite ist jetzt sichtbar und interaktiv
+deactivate WebBrowser
+
+@enduml
+
+```
