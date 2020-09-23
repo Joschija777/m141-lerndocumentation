@@ -301,32 +301,3 @@ nMethoden .. (Funktionen)
 @enduml
 
 ```
-
-
-```plantuml
-
-@startuml
-
-actor Joschija
-participant WebBrowser
-participant WebServer
-participant JSON
-
-
-Joschija -> WebBrowser : Webbrowser öffnen
-activate WebBrowser
-WebBrowser -> WebServer : HTTP/POST - index.html
-activate WebServer
-WebServer -> WebBrowser : Browser lädt Javascript... herunter
-deactivate WebServer
-activate JSON
-WebBrowser -> JSON : zB. addButton (ajax js daten anfordern)
-JSON -> WebBrowser : z.B Tabelle generieren
-deactivate JSON
-WebBrowser -> WebBrowser : Browser führt Reaktionen aus (Rendern)
-WebBrowser -> Joschija : Seite ist jetzt sichtbar und interaktiv
-deactivate WebBrowser
-
-@enduml
-
-```
