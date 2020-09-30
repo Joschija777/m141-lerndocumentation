@@ -5,10 +5,51 @@
 <br>
 <br>
 
-## PHP Syntax
+
+## Was haben wir gemacht?
+Zu beginn der Lektion haben wir eine Repetition von PHP gemacht. Wo man 9 verschiedene Aufgaben lösen musste:
 
 
-### 1. Gültige Variablen
+- [Aufgabe 1 - Gültige Variablen](#_1-Gültige-Variablen)
+- [Aufgabe 2 - Syntax](#_2-Syntax)
+- [Aufgabe 3 - Syntax](#_3-Syntax)
+- [Aufgabe 4 - Syntax](#_4-Syntax)
+- [Aufgabe 5 - Syntax](#_5-Syntax)
+- [Aufgabe 6 - Syntax](#_6-Syntax)
+- [Aufgabe 7 - Syntax](#_7-Syntax)
+- [Aufgabe 8 - Arrays](#_8-Arrays)
+- [Aufgabe 9 - Mathe](#_9-Mathe)
+
+
+
+
+
+<br>
+<br>
+<br>
+
+## Wie war es?
+
+
+<br>
+
+
+
+## Wie ist es mir ergangen?
+
+<br>
+<br>
+
+
+
+
+
+## Was habe ich gelernt?
+
+### PHP Syntax
+
+
+#### 1. Gültige Variablen
 
 __Auftrag:__
 
@@ -39,7 +80,7 @@ $MeNg
 <br>
 
 
-### 2. Syntax
+#### 2. Syntax
 
 __Auftrag:__
 
@@ -64,7 +105,7 @@ Hallo "Onkel"
 
 
 
-### 3. Syntax
+#### 3. Syntax
 
 __Auftrag:__
 
@@ -90,7 +131,7 @@ Hallo Welt
 
 
 
-### 4. Syntax
+#### 4. Syntax
 
 __Auftrag:__
 
@@ -116,7 +157,7 @@ Hallo Welt
 
 
 
-### 5. Syntax
+#### 5. Syntax
 
 __Auftrag:__
 
@@ -139,7 +180,7 @@ Die Variable 49.90 enthält den Wert: 49.90
 <br>
 
 
-### 6. Syntax
+#### 6. Syntax
 
 __Auftrag:__
 
@@ -163,7 +204,7 @@ Die Variable $preis enthält den Wert: $preis
 
 
 
-### 7. Syntax
+#### 7. Syntax
 
 __Auftrag:__
 
@@ -188,7 +229,7 @@ Die Variable $preis enthält den Wert: 49.90
 
 
 
-### 8. Arrays
+#### 8. Arrays
 
 __Auftrag:__
 
@@ -219,7 +260,7 @@ Tochter
 
 
 
-### 9. Mathe
+#### 9. Mathe
 
 __Auftrag:__
 
@@ -251,9 +292,19 @@ __Lösung:__
 <br>
 <br>
 
-## Object orientiertes Programmieren
 
-### 1. Wie wird in PHP instanziert?
+<br>
+
+## Was ist noch offen?
+
+
+
+
+
+
+### Object orientiertes Programmieren
+
+#### 1. Wie wird in PHP instanziert?
 
 __Klasse: User__
 ```PHP
@@ -280,7 +331,7 @@ Nach der Klassendefinition erstellen wir nun ein Objekt von der Klasse oder ande
 <br>
 <br>
 
-### 2. Was bedeutet der Pfeil?
+#### 2. Was bedeutet der Pfeil?
 
 ```
 Mit dem Pfeil-Operator kannst Du auf die Funktionen oder Variablen
@@ -289,7 +340,7 @@ einer Klasse zugreifen.
 <br>
 <br>
 
-### 3. Was bedeutet $this?
+#### 3. Was bedeutet $this?
 
 ```
 Es ist eine Referenz auf das aktuelle Objekt
@@ -297,7 +348,7 @@ Es ist eine Referenz auf das aktuelle Objekt
 <br>
 <br>
 
-### 4. Welche Möglichkeiten an Zugriffsmodifizierer kennt PHP?
+#### 4. Welche Möglichkeiten an Zugriffsmodifizierer kennt PHP?
 
 ```
 $public
@@ -307,7 +358,7 @@ $protectet
 <br>
 <br>
 
-### 5. Dokumentieren Sie Beispiele zu Konstruktoren, Methoden, Klassen…
+#### 5. Dokumentieren Sie Beispiele zu Konstruktoren, Methoden, Klassen…
 
 __Klassen:__
 ```
@@ -400,7 +451,7 @@ public function setRandomPassword() {
 <br>
 <br>
 
-### 6. Dokumentieren Sie die Beispiele zur Vererbung mit PHP…
+#### 6. Dokumentieren Sie die Beispiele zur Vererbung mit PHP…
 
 ```PHP
 class Saeugetier
@@ -429,16 +480,16 @@ Damit haben wir nun den Kindklassen Mensch und Hund die Methoden und Eigenschaft
 <br>
 <br>
 
-## Model-View-Controller
+### Model-View-Controller
 
-### Was ist MVC?
+#### Was ist MVC?
 MVC steht für Model, View, Controller. Eine kurze Antwort auf die Frage, was unter den drei Begriffen verstanden wird, könnte wie folgt lauten:
 
-### Model:
+#### Model:
 Das Model hat die Aufgabe, die Webanwendung mit Daten aus der Datenbank (oder von wo auch immer) zu versorgen und die Daten, wenn gewünscht, zu speichern.
 
-### View:
+#### View:
 Die View beinhaltet die Verwaltung der Templates, und generiert die HTML-Ausgabe.
 
-### Controller:
+#### Controller:
 Der Kontroller entscheidet, was mit den übergebenen Parametern anzufangen ist, und steuert die Anwendung.
