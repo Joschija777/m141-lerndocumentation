@@ -16,18 +16,25 @@ Am Anfang der ersten Lektion haben wir unsere Lerndokumentation angeschaut und w
 
 <br>
 
-Zum anderen haben wir nochmal ein MVC Beispiel durchgemacht [ELVIS](#Test)
+Zum anderen haben wir nochmal ein MVC Beispiel durchgemacht. Das habe ich heute nicht dokumentiert, da ich das gleiche schon letzte Woche erledigt habe.
+
+Am Schluss mussten wir noch ein MVC Projekt mittels TWIG analysieren und eine
 
 
+<br>
+<br>
 <br>
 
 ## Wie war es?
 
 
 <br>
+<br>
+<br>
 
 ## Wie ist es mir ergangen?
 
+<br>
 <br>
 <br>
 
@@ -37,5 +44,9 @@ Zum anderen haben wir nochmal ein MVC Beispiel durchgemacht [ELVIS](#Test)
 
 
 <br>
+<br>
+<br>
 
 ## Was ist noch offen?
+
+### TWIG

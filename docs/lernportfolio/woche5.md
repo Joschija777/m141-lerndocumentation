@@ -8,8 +8,6 @@
 
 ## Was haben wir gemacht?
 Zu beginn der Lektion haben wir eine Repetition von PHP gemacht. Wo man 9 verschiedene Aufgaben lösen musste:
-
-
 - [Aufgabe 1 - Gültige Variablen](#_1-Gültige-Variablen)
 - [Aufgabe 2 - Syntax](#_2-Syntax)
 - [Aufgabe 3 - Syntax](#_3-Syntax)
@@ -20,9 +18,16 @@ Zu beginn der Lektion haben wir eine Repetition von PHP gemacht. Wo man 9 versch
 - [Aufgabe 8 - Arrays](#_8-Arrays)
 - [Aufgabe 9 - Mathe](#_9-Mathe)
 
+<br>
 
+Danach mussten wir uns in das Thema [Objekt orientiertes Programieren](#Object-orientiertes-Programmieren) einlesen. In dem wir als Hausaufgabe auch 5 Punkte beschreiben musste:
+1. [Wie wird in PHP instanziert?](#_1-Wie-wird-in-PHP-instanziert)
+2. [Was bedeutet der Pfeil?](#_2-Was-bedeutet-der-Pfeil)
+3. [Was bedeutet this?](#_3-Was-bedeutet-this)
+4. [Welche Möglichkeiten an Zugriffsmodifizierer kennt PHP?](#_4-Welche-Möglichkeiten-an-Zugriffsmodifizierer-kennt-PHP)
+5. [Dokumentieren Sie Beispiele zu Konstruktoren, Methoden, Klassen…](#_5-Dokumentieren-Sie-Beispiele-zu-Konstruktoren-Methoden-Klassen…)
 
-
+Als letzter Abschnitt mussten wir uns noch in das Thema [MVC](#Model-View-Controller) einlesen
 
 <br>
 <br>
@@ -30,13 +35,21 @@ Zu beginn der Lektion haben wir eine Repetition von PHP gemacht. Wo man 9 versch
 
 ## Wie war es?
 
+Der heutige Tag war abwechlungsreich gestaltet mit thorie und Praxis. Aber der Schwerpunkt war schon mehr auf der Thorie. Die Zeitlichen Abstände stimmten und soweit passte mir alles.
 
+<br>
+<br>
 <br>
 
 
 
 ## Wie ist es mir ergangen?
 
+Die wiederholungen von den PHP-Aufgaben waren mir sehr gut gelungen und ich hatte nur 1 Fehler. Aber obwohl wir in der Schule Objekt orientiertes Programmieren in Javsa hatten. Machte es mir trotzdem noch Probleme alle Syntax und Methoden, Funktionen zu verstehen.
+
+Als neues Thema durfte ich MVC lernen. Da die Strucktur oder besser gesagt, der ganze Aufbau übersichtlicher macht.
+
+<br>
 <br>
 <br>
 
@@ -47,7 +60,6 @@ Zu beginn der Lektion haben wir eine Repetition von PHP gemacht. Wo man 9 versch
 ## Was habe ich gelernt?
 
 ### PHP Syntax
-
 
 #### 1. Gültige Variablen
 
@@ -289,22 +301,33 @@ __Lösung:__
 ```
 <br>
 <br>
+
+### Model-View-Controller
+
+#### Was ist MVC?
+MVC steht für Model, View, Controller. Eine kurze Antwort auf die Frage, was unter den drei Begriffen verstanden wird, könnte wie folgt lauten:
+
+#### Model:
+Das Model hat die Aufgabe, die Webanwendung mit Daten aus der Datenbank (oder von wo auch immer) zu versorgen und die Daten, wenn gewünscht, zu speichern.
+
+#### View:
+Die View beinhaltet die Verwaltung der Templates, und generiert die HTML-Ausgabe.
+
+#### Controller:
+Der Kontroller entscheidet, was mit den übergebenen Parametern anzufangen ist, und steuert die Anwendung.
+
 <br>
 <br>
-
-
 <br>
 
 ## Was ist noch offen?
 
-
-
-
+Die verschiedenen Syntaxe Funktionen und Methoden im OOP!!
 
 
 ### Object orientiertes Programmieren
 
-#### 1. Wie wird in PHP instanziert?
+#### 1. Wie wird in PHP instanziert
 
 __Klasse: User__
 ```PHP
@@ -331,7 +354,7 @@ Nach der Klassendefinition erstellen wir nun ein Objekt von der Klasse oder ande
 <br>
 <br>
 
-#### 2. Was bedeutet der Pfeil?
+#### 2. Was bedeutet der Pfeil
 
 ```
 Mit dem Pfeil-Operator kannst Du auf die Funktionen oder Variablen
@@ -340,7 +363,7 @@ einer Klasse zugreifen.
 <br>
 <br>
 
-#### 3. Was bedeutet $this?
+#### 3. Was bedeutet this
 
 ```
 Es ist eine Referenz auf das aktuelle Objekt
@@ -348,7 +371,7 @@ Es ist eine Referenz auf das aktuelle Objekt
 <br>
 <br>
 
-#### 4. Welche Möglichkeiten an Zugriffsmodifizierer kennt PHP?
+#### 4. Welche Möglichkeiten an Zugriffsmodifizierer kennt PHP
 
 ```
 $public
@@ -479,17 +502,3 @@ Damit haben wir nun den Kindklassen Mensch und Hund die Methoden und Eigenschaft
 <br>
 <br>
 <br>
-
-### Model-View-Controller
-
-#### Was ist MVC?
-MVC steht für Model, View, Controller. Eine kurze Antwort auf die Frage, was unter den drei Begriffen verstanden wird, könnte wie folgt lauten:
-
-#### Model:
-Das Model hat die Aufgabe, die Webanwendung mit Daten aus der Datenbank (oder von wo auch immer) zu versorgen und die Daten, wenn gewünscht, zu speichern.
-
-#### View:
-Die View beinhaltet die Verwaltung der Templates, und generiert die HTML-Ausgabe.
-
-#### Controller:
-Der Kontroller entscheidet, was mit den übergebenen Parametern anzufangen ist, und steuert die Anwendung.
