@@ -1,5 +1,6 @@
 # Concept Map
 
+
 ```plantuml
 
 
@@ -18,7 +19,6 @@
 (print_r)
 (var_dumb)
 (Funktionen)
-
 (Radio-Button)
 (JavaScript)
 (WebServer)
@@ -27,7 +27,6 @@
 (Server-Side-Rendering) as (SSR)
 (file_get_contents)
 (file_put_contents)
-
 (Object-Orientrietes-Programmieren) as (OOP)
 (Zugriffsmodifizierer)
 ($public)
@@ -40,9 +39,32 @@
 (Model)
 (View)
 (Controller)
+(Template-Engine)
+(Use-Case)
+(Aktoren)
+(FunktionaleAnforderung)
+(Testszenario)
+(Testfall)
 
-
-
+(Testszenario) <--> (Testfall)
+(FunktionaleAnforderung) <--> (MVC)
+(FunktionaleAnforderung) <--> (PHP)
+(FunktionaleAnforderung) <--- (Funktionen)
+(FunktionaleAnforderung) <--- (Testszenario)
+(FunktionaleAnforderung) <--- (Testfall)
+(Aktoren) <--> (FunktionaleAnforderung)
+(Aktoren) <--> (Testszenario)
+(Aktoren) <--> (Testfall)
+(Use-Case) <--- (Testszenario)
+(Use-Case) <--- (Testfall)
+(Use-Case) <--- (Aktoren)
+(Use-Case) <--- (FunktionaleAnforderung)
+(Template-Engine) <--- (Funktionen)
+(Template-Engine) <--- (Formular)
+(Template-Engine) <--> (SSR)
+(Template-Engine) <--> (PHP)
+(Template-Engine) ---> (View)
+(Template-Engine) ---> (HTML)
 
 (Zugriffsmodifizierer) <--- ($public)
 (Zugriffsmodifizierer) <--- ($protectet)
@@ -54,9 +76,14 @@
 
 (OOP) <--> (PHP)
 (MVC) <--- (Model)
+(Model) <--- (Klasse)
 (MVC) <--- (View)
 (MVC) <--- (Controller)
 (MVC) <--> (OOP)
+(View) <--- (HTML)
+(Controller) <--- (GET)
+(Controller) <--- (POST)
+(Controller) <--- (Funktionen)
 (MVC) <--> (PHP)
 (Vererbung) ---> (OOP)
 (Instanz) ---> (OOP)
@@ -65,12 +92,6 @@
 (Methoden) ---> (OOP)
 (Funktionen) ---> (OOP)
 (MVC) <--> (HTML)
-
-
-
-
-
-
 
 
 (Web) <--- (PHP)
@@ -112,8 +133,41 @@
 
 
 
+note right of (Testszenario) 
+  Beschreibt die Testumgebung und die Aktion die 
+  überprüft werden soll
+end note
+
+note right of (Testfall) 
+  Beschreiben konkret, welcher Button wie/wann/was auslösen soll
+end note
+
+note right of (FunktionaleAnforderung) 
+  In der Technik ist eine Anforderung eine Aussage 
+  über eine zu erfüllende Eigenschaft oder zu 
+  erbringende Leistung eines Produktes, 
+  Systems oder Prozesses.
+end note
 
 
+note right of (Aktoren)
+  handelnde Person
+end note
+
+
+note right of (Use-Case)
+  Ein Use Case bündelt alle möglichen Szenarien, 
+  die eintreten können, wenn ein Akteur versucht, mit 
+  Hilfe des betrachteten Systems ein bestimmtes 
+  fachliches Ziel zu erreichen.
+end note
+
+note right of (Template-Engine)
+  Eine Template-Engine ist eine Software, 
+  die eine Vorlagen-Datei verarbeitet und 
+  bestimmte Platzhalter darin ähnlich wie bei einem 
+  Formular durch jeweils aktuelle Inhalte ersetzt.
+end note
 
 note right of (OOP)
  Durch das Abbilden eurer Anwendung in
@@ -285,11 +339,6 @@ end note
 
 
 
-
-
-
-
-
 note "Wird für Webapps \n eingesetzt" as NWebapps
 (ScriptSprachen) .. NWebapps
 NWebapps .. (PHP)
@@ -302,35 +351,6 @@ Mpoge .. (GET)
 note "Methoden sind Funktionen, \n die innerhalb einer \n Klasse verwendet werden" as nMethoden
 (Methoden) .. nMethoden
 nMethoden .. (Funktionen)
-
-@enduml
-
-```
-
-
-```plantuml
-
-@startuml
-
-actor Joschija
-participant WebBrowser
-participant WebServer
-participant JSON
-
-
-Joschija -> WebBrowser : Webbrowser öffnen
-activate WebBrowser
-WebBrowser -> WebServer : HTTP/POST - index.html
-activate WebServer
-WebServer -> WebBrowser : Browser lädt Javascript... herunter
-deactivate WebServer
-activate JSON
-WebBrowser -> JSON : zB. addButton (ajax js daten anfordern)
-JSON -> WebBrowser : z.B Tabelle generieren
-deactivate JSON
-WebBrowser -> WebBrowser : Browser führt Reaktionen aus (Rendern)
-WebBrowser -> Joschija : Seite ist jetzt sichtbar und interaktiv
-deactivate WebBrowser
 
 @enduml
 

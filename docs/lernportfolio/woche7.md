@@ -18,7 +18,7 @@ Am Anfang der ersten Lektion haben wir unsere Lerndokumentation angeschaut und w
 
 Zum anderen haben wir nochmal ein MVC Beispiel durchgemacht. Das habe ich heute nicht dokumentiert, da ich das gleiche schon letzte Woche erledigt habe.
 
-Am Schluss mussten wir noch ein MVC Projekt mittels TWIG analysieren und eine
+Am Schluss mussten wir noch ein MVC Projekt mittels TWIG analysieren und eine neue 
 
 
 <br>
