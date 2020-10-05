@@ -40,7 +40,9 @@ Am Schluss mussten wir noch ein MVC Projekt mittels TWIG analysieren und eine
 
 ## Was habe ich gelernt?
 
-### MVC
+### MVC-TwIG Projekt
+
+
 
 
 <br>
@@ -50,3 +52,9 @@ Am Schluss mussten wir noch ein MVC Projekt mittels TWIG analysieren und eine
 ## Was ist noch offen?
 
 ### TWIG
+
+#### Was ist TWIG
+
+Twig ist eine Template-Engine für die Programmiersprache PHP. Die Syntax wurde von der Template-Engine Jinja sowie der des Django-Frameworks beeinflusst. Twig ist eine freie Software,
+
+<br>

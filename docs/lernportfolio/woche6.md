@@ -34,7 +34,7 @@ Mit der Aufgabe vom Sequenzdiagramm und Klassendiagramm wurde das ganze noch vie
 <br>
 
 ## Wie ist es mir ergangen?
-Da eben die Applis eine Präsentation über MVC gehalten haben kam ich besser in MVC draus, da ich letze Woche noch mühe hatte.
+Weil die Applis eine Präsentation über MVC gehalten haben kam ich besser in MVC draus, da ich letze Woche noch mühe hatte.
 
 Probleme machte mir am Anfang das Sequenzdiagramm da ich den Ablauf noch nicht richtig verstanden habe. Ich musste ein bisschen recherieren, aber am Schluss hatte ich es trozdem geschaft.
 Bei den MVC Hausaufgaben Fragte ich einen Mitarbeiter und er erklärte mir das ganze nocheinmal.
