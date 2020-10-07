@@ -198,4 +198,4 @@ Modell: <?=$data['modell']?>
 <br>
 
 #### Browser
-<img width="1000%" src='./bilder/mvc.png'></img>
+<img width="100%" src='./bilder/mvc.png'></img>
