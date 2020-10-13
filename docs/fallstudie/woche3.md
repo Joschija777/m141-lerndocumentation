@@ -1,8 +1,11 @@
 # SSR & CSR
 
 ## Server Side Rendering
+Beim Server-seitigen Rendern werden die React-Komponenten auf dem Server gerendert. Die Ausgabe ist HTML-Inhalt. Das kann natürlich eine gewisse Geschwindigkeit bieten. Suchmaschinenoptimierte Seiten gehen deshalb lieber den SSR-Weg.
 
+__Userfeeling:__ Das anfängliche Laden der Seite ist schneller als beim Client-seitigen Rendern. In Spitzenzeiten zahlreicher Anfragen leidet allerdings die Leistung der Website darunter. Geeignet eher für statische Seiten. 
 
+<br>
 
 ### PlantUML
 ```plantuml
@@ -33,9 +36,26 @@ deactivate WebBrowser
 
 ```
 
+#### Vorteile:
+- deutliche Leistungsverbesserung (bei kleineren Anwendungen)
+- Suchmaschinenoptimierung
+- Leistungsbeeinträchtigung bei größeren Anwendungen
+
+#### Nachteile:
+- Erhöhte Antwortzeiten in Spitzenzeiten
+- Erhöhte Komplexität der Anwendung
+
+
+<br>
+<br>
+<br>
 
 ## Client Side Rendering
+Beim Client-seitigen Rendern lädt der Browser eine minimale HTML-Seite. Es rendert das JavaScript und füllt den Inhalt darin.
 
+__Userfeeling:__ Nach dem anfänglichen, langsamen Laden ist der Rest des Website-Renderings schneller. Die anfängliche Ladezeit kann aber frustrierend sein. Geeignet eher für interaktive Webanwendungen mit mehr statischem Inhalt. 
+
+<br>
 
 ### PlantUML
 ```plantuml
