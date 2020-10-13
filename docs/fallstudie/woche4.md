@@ -44,9 +44,9 @@ Zu der Programmierung muss man Wöchentlich das erarbeitete und neu erlernte in 
 - Mittels Twig
 
 
+**Vorgehen:**
 
-### Vorgehen
-<img width="60%"  src='./bilder/Zeitplan.png'></img>
+<img width="70%"  src='./bilder/Zeitplan.png'></img>
 
 
 <br>
