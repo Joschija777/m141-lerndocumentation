@@ -7,7 +7,7 @@ __Userfeeling:__ Das anfängliche Laden der Seite ist schneller als beim Client-
 
 <br>
 
-### PlantUML
+### Sequenzdiagramm
 ```plantuml
 
 @startuml
@@ -57,7 +57,7 @@ __Userfeeling:__ Nach dem anfänglichen, langsamen Laden ist der Rest des Websit
 
 <br>
 
-### PlantUML
+### Sequenzdiagramm
 ```plantuml
 
 @startuml

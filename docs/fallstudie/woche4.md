@@ -53,12 +53,90 @@ Zu der Programmierung muss man Wöchentlich das erarbeitete und neu erlernte in 
 
 ### Formular
 
-<img width="60%"  src='./bilder/Reiseantrag.jpeg'></img>
+<img width="70%"  src='./bilder/Reiseantrag.jpeg'></img>
 
 
-
+<br>
+<br>
 
 ## Umsetzung MVC
 
+### Model
+
+- Klasse Reisedaten
+- Klasse Reiseziel
+- Klasse Reisezweck
+- Klasse Projektnummer
+- Klasse ÖV
+- Klasse Flugzeug
+- Klasse Auto
+- Klasse Unterkunft
+
+
+### View
+
+- Mittels Twig
+- HTML
+- CSS Framework (Materialize)
+- Header (Navbar)
+- Main (interaktives Formular)
+- Footer (Kontaktangaben)
+
+
+### Controller
+
+- Button bei Reisemittel (interaktiv) 
+- Arrays
+- Konstrucktor
+- Tabelle
+- Selectfeld 
+- Dropdown
+- Verbindung mit Datenbank
+- evt. digitaler Signatur
+
+
+
+<br>
+<br>
+
 
 ## Umsetzung Twig
+
+
+### Layout
+Im Layout werde alle Twig-Html Sites eingebunden. Wie Header, Main und Footer.
+Dies dient dazu, das man nicht immer das gleiche einbinden wiederholt ausführen. 
+
+***
+
+### Header
+Den Header werde ich nur einmal erstellen da der ja sozusagen statisch ist. Der Header wird so aussehen, dass ich eine Nav habe.
+
+Das Nav wird wahrscheinlich beinhalten:
+- FirmenLogo
+- Forumlar (Reiseantrag)
+- Tabelle (Wo das Formular ausgewertet wird)
+- evt. Kalender
+
+***
+
+
+### Footer
+Der Footer wird auch statisch sein und dieser wird nicht soviel beinhalten:
+- aktuelle Zeit
+- aktuelles Datum
+- Informationen
+
+***
+
+### Main
+Da das main interaktiv ist und nich wie bei Footer und Header gleich aufgebaut ist, muss ich diese immer anderst gestallen.
+
+Was es sicher beinhaltet ist zu einem:
+- interaktive Formular
+- Time
+- Select Boxes
+- Dropdown
+- Tabelle (Array)
+
+

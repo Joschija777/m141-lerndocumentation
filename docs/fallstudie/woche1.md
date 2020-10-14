@@ -8,15 +8,16 @@ MVC steht für Model, View, Controller. Eine kurze Antwort auf die Frage, was un
 
 __Model:__
 
-Das Model hat die Aufgabe, die Webanwendung mit Daten aus der Datenbank (oder von wo auch immer) zu versorgen und die Daten, wenn gewünscht, zu speichern.
+Das Model ist verantwortlich für die Durchführung von Berechnungen. Es kapselt die Kern-Daten und -Funktionalität einer Applikation. (Als Bestandteil der Kern-Funktionalität stehen Methoden zur Manipulation der Daten zur Verfügung, welche durch einen Controller aufgerufen werden können. Weiterhin gibt es Methoden zur Lieferung von Daten welche die Views aufrufen können.) Das Model kennt keine konkreten Views und Controller, weiß also nicht wie, ob und wie oft es selber dargestellt werden wird.
+
 
 __View:__
 
-Die View beinhaltet die Verwaltung der Templates, und generiert die HTML-Ausgabe.
+Die View ist verantwortlich für die Präsentation. Sie zeigt dem Anwender Informationen über das Model an, bereitet also die Daten des Model (oder Teile davon) in graphischer Darstellung auf. Eine View kennt immer genau ein Model. Falls sich Daten des Model ändern, so wird die View darüber vom Model benachrichtigt. Die View führt eine update-Methode aus, in der sie sich den aktuellen Datenzustand des Model holt(Methodenaufruf im Model) und ihre Darstellung sofort dementsprechend aktualisiert. 
 
 __Controller:__
 
-Der Kontroller entscheidet, was mit den übergebenen Parametern anzufangen ist, und steuert die Anwendung.
+Der Controller ist verantwortlich für die Interaktion. Er definiert die Benutzerinteraktion der Applikation - er definiert die Reaktion der Benutzerschnittstelle auf die Eingabe. So nimmt er Benutzereingaben entgegen und bildet diese dann mit Hilfe der anderen Schichten auf Dienstanforderungen (Anzeigedienste der View oder datenverarbeitende Dienste des Model) ab. 
 
 <br>
 
