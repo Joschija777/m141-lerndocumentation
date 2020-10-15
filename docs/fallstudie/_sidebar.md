@@ -1,5 +1,5 @@
 * [Archidekturkonzept](fallstudie/woche4.md)
-* [Schulwoche 5](fallstudie/woche5.md)
+* [Use-Case](fallstudie/woche5.md)
 * [Schulwoche 6](fallstudie/woche6.md)
 * [Schulwoche 7](fallstudie/woche7.md)
 * [Schulwoche 8](fallstudie/woche8.md)
