@@ -63,15 +63,13 @@ Zu der Programmierung muss man Wöchentlich das erarbeitete und neu erlernte in 
 
 ### Model
 
+- Klasse Person
 - Klasse Reisedaten
 - Klasse Reiseziel
 - Klasse Reisezweck
-- Klasse Projektnummer
 - Klasse ÖV
 - Klasse Flugzeug
 - Klasse Auto
-- Klasse Unterkunft
-
 
 ### View
 
