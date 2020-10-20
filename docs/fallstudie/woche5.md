@@ -55,6 +55,10 @@ rectangle interneWebseite {
 | __Kommentare:__ | ~ ||
 
 
+[Funktionale Anforderungen](fallstudie/woche6.md#_1-personeninformationen-erfassen)
+
+
+
 <br>
 <br>
 
@@ -72,6 +76,8 @@ rectangle interneWebseite {
 | __Essentielle Schritte:__ | 1. Der Benutzer muss Personeninformationen eingeben  <br> 2. Abreise eintragen <br> 3. Rückreise eingeben <br>  |
 | __Erweiterungen:__ |  2a. Das Abreisedatum wurde nicht ausgewählt <br> 2a1. Das Sytem merkt das kein Abreisedatum gewählt wurde <br> 2a2. Das System gibt eine Fehlermeldung aus <br><br>  3a. Das Rückreisdatum wurde nicht ausgewählt <br> 3a1. Das Sytem merkt das kein Rückreisdatum gewählt wurde <br> 3a2. Das System gibt eine Fehlermeldung aus |
 | __Kommentare:__ | ~ ||
+
+[Funktionale Anforderungen](fallstudie/woche6.md#_2-reisedaten-wählen)
 
 <br>
 <br>
@@ -91,6 +97,7 @@ rectangle interneWebseite {
 | __Erweiterungen:__ |  1a. Der Reiseziel wird nicht eingegebn <br> 1a1. Das Sytem merkt das das Reiseziel nicht eingegeben wurde <br> 1a2. Das System gibt eine Fehlermeldung aus <br> |
 | __Kommentare:__ | ~ ||
 
+[Funktionale Anforderungen](fallstudie/woche6.md#_3-reiseziel-eintragen)
 <br>
 <br>
 
@@ -109,7 +116,7 @@ rectangle interneWebseite {
 | __Erweiterungen:__ |  1a. Der Reisezweck wird nicht eingegebn <br> 1a1. Das Sytem merkt das das Reisezweck nicht eingegeben wurde <br> 1a2. Das System gibt eine Fehlermeldung aus <br> |
 | __Kommentare:__ | ~ ||
 
-
+[Funktionale Anforderungen](fallstudie/woche6.md#_4-reisezweck-wählen)
 <br>
 <br>
 
@@ -128,6 +135,7 @@ rectangle interneWebseite {
 | __Erweiterungen:__ |  1a. Der Reisemitttel wird nicht ausgesucht <br> 1a1. Das Sytem merkt das kein Reisemitttel ausgesucht wurde <br> 1a2. Das System gibt eine Fehlermeldung aus <br> |
 | __Kommentare:__ | ~ ||
 
+[Funktionale Anforderungen](fallstudie/woche6.md#_5-reisemittel-herausfiltern)
 <br>
 <br>
 
@@ -145,6 +153,8 @@ rectangle interneWebseite {
 | __Essentielle Schritte:__ | 1. Der Benutzer wählt bei Reisemittel ÖV aus  <br> 2. Der User trägt seine ÖV-informationen ein <br>  |
 | __Erweiterungen:__ |  2a. Die öv-informationen wurden nicht mitgegeben <br> 2a1. Das Sytem merkt das kein Informationen eingetragen wurde <br> 2a2. Das System gibt eine Fehlermeldung aus <br> |
 | __Kommentare:__ | ~ ||
+
+[Funktionale Anforderungen](fallstudie/woche6.md#_6-Öffentliche-verkehrsmittel-auswählen)
 
 <br>
 <br>
@@ -164,6 +174,8 @@ rectangle interneWebseite {
 | __Erweiterungen:__ |  2a. Die Flugzeuginformationen wurden nicht eingetragen <br> 2a1. Das Sytem merkt das kein Informationen eingetragen wurde <br> 2a2. Das System gibt eine Fehlermeldung aus <br> |
 | __Kommentare:__ | ~ ||
 
+[Funktionale Anforderungen](fallstudie/woche6.md#_7-flugzeuginformationen-erfassen)
+
 <br>
 <br>
 
@@ -182,6 +194,8 @@ rectangle interneWebseite {
 | __Erweiterungen:__ |  2a. Kein Fahrzeug wurde ausgesucht <br> 2a1. Das Sytem merkt das kein Fahrzeug ausgesucht wurde <br> 2a2. Das System gibt eine Fehlermeldung aus <br><br> 2b. Das Fahrzeug ist nicht mehr Verfügbar <br> 2b1. Das Sytem merkt das das Fahrzeug nicht mehr Verfügber ist <br> 2b2. Das System gibt eine Fehlermeldung aus|
 | __Kommentare:__ | ~ ||
 
+[Funktionale Anforderungen](fallstudie/woche6.md#_8-farzeug-aussuchen)
+
 <br>
 <br>
 
@@ -192,13 +206,15 @@ rectangle interneWebseite {
 | Name: | Button zum speichern drücken | 
 |----------------------------|-----------------------------------|
 | __Nummer:__ | 09 |
-| __Ziel im Kontext:__ | User drückt am Schluss auf den Speichernbutton |
+| __Ziel im Kontext:__ | User speichert die Daten vom Formular |
 | __Akteure:__ | Benutzer |
 | __Trigger:__ | Der Benutzer klickt auf den Button <br> und das Sytem speichert diese Daten in einer Datenbank |
 | __Vorbedingung:__ | Ausgefühltes Formular |
 | __Essentielle Schritte:__ | 1. Der Benutzer drückt Button  <br> 2. System überprüft ob alles ausgefühlt wurde <br> 3. System speichert die Daten in einder Datenbank <br> |
 | __Erweiterungen:__ |  2a. Das Formular wurde nicht ganz ausgefühlt <br> 2a1. Das Sytem merkt das Daten Fehlen <br> 2a2. Das System gibt eine Fehlermeldung aus <br>
 | __Kommentare:__ | ~ ||
+
+[Funktionale Anforderungen](fallstudie/woche6.md#_9-button-zum-speichern-drücken)
 
 <br>
 <br>
