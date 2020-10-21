@@ -5,3 +5,4 @@
 * [Schulwoche 5](lernportfolio/woche5.md)
 * [Schulwoche 6](lernportfolio/woche6.md)
 * [Schulwoche 7](lernportfolio/woche7.md)
+* [Schulwoche 8](lernportfolio/woche8.md)

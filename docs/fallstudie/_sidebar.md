@@ -1,0 +1,7 @@
+* [Archidekturkonzept](fallstudie/woche4.md)
+* [Use-Case](fallstudie/woche5.md)
+* [Funktional Anforderungen](fallstudie/woche6.md)
+* [Test Szenario](fallstudie/woche7.md)
+* [Model View Controller](fallstudie/woche1.md)
+* [Template Engine Twig](fallstudie/woche2.md)
+* [SSR & CSR](fallstudie/woche3.md)
