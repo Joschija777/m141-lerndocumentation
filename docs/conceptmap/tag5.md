@@ -132,19 +132,19 @@
 
 
 
-note right of (Testszenario) 
-  Beschreibt die Testumgebung und die Aktion die 
+note right of (Testszenario)
+  Beschreibt die Testumgebung und die Aktion die
   überprüft werden soll
 end note
 
-note right of (Testfall) 
+note right of (Testfall)
   Beschreiben konkret, welcher Button wie/wann/was auslösen soll
 end note
 
-note right of (FunktionaleAnforderung) 
-  In der Technik ist eine Anforderung eine Aussage 
-  über eine zu erfüllende Eigenschaft oder zu 
-  erbringende Leistung eines Produktes, 
+note right of (FunktionaleAnforderung)
+  In der Technik ist eine Anforderung eine Aussage
+  über eine zu erfüllende Eigenschaft oder zu
+  erbringende Leistung eines Produktes,
   Systems oder Prozesses.
 end note
 
@@ -155,16 +155,16 @@ end note
 
 
 note right of (Use-Case)
-  Ein Use Case bündelt alle möglichen Szenarien, 
-  die eintreten können, wenn ein Akteur versucht, mit 
-  Hilfe des betrachteten Systems ein bestimmtes 
+  Ein Use Case bündelt alle möglichen Szenarien,
+  die eintreten können, wenn ein Akteur versucht, mit
+  Hilfe des betrachteten Systems ein bestimmtes
   fachliches Ziel zu erreichen.
 end note
 
 note right of (Template-Engine)
-  Eine Template-Engine ist eine Software, 
-  die eine Vorlagen-Datei verarbeitet und 
-  bestimmte Platzhalter darin ähnlich wie bei einem 
+  Eine Template-Engine ist eine Software,
+  die eine Vorlagen-Datei verarbeitet und
+  bestimmte Platzhalter darin ähnlich wie bei einem
   Formular durch jeweils aktuelle Inhalte ersetzt.
 end note
 
