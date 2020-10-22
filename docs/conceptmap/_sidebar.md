@@ -2,5 +2,5 @@
 * [Woche 2](conceptmap/tag2.md)
 * [Woche 3](conceptmap/tag3.md)
 * [Woche 4](conceptmap/tag4.md)
-* [Woche 5](conceptmap/tag5.md)
-* [Woche 6](conceptmap/tag6.md)
+* [Woche 5 - 9](conceptmap/tag5.md)
+* [Woche 10](conceptmap/tag6.md)
