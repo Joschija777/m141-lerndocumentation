@@ -35,12 +35,18 @@ Am Schluss mussten wir noch ein MVC Projekt (die View mittels TWIG) analysieren 
 
 ## Wie war es?
 
+Der Untericht war gut und abwechslungsreich gestaltet. Gegen dem Schluss fand ich war das TWIG Template zu wenig genau erklärt und ich denke nicht nur bei mir kam das unverständlich rüber.
+
+Super fand ich aber, dass wir das ganze MVC nocheinmal durgemacht haben. Das hat mir einfach nochmal geholfen.
+
 
 <br>
 <br>
 <br>
 
 ## Wie ist es mir ergangen?
+Mit dem Model View Controller komme ich immer besser durch die ganzen wiederholungen draus. Beim TWIG Template werder ich mich anscheinend noch viel auseinander setzen müssen, da ich das in der Praxis nicht genau verstanden habe.
+
 
 <br>
 <br>

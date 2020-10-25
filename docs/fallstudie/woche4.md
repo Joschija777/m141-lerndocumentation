@@ -15,7 +15,7 @@
 ## Beschreibung Aufgabenstellung
 
 
-### Aufgabenstellung 
+### Aufgabenstellung
 
 Meine Aufgabe ist kurz gesagt, in wenigen Wochen eine interaktive PHP Webseite mittels Server Side Rendering zu erstellen.
 Das ganze PHP Projekt wird mittels MVC und Twig erstellt.
@@ -23,7 +23,7 @@ Zu der Programmierung muss man Wöchentlich das erarbeitete und neu erlernte in 
 
 
 
-**Probleme:** 
+**Probleme:**
 - Bei dem Formular für den Reiseantrag gibt es sehr viele Möglichkeiten als auswahl die nicht immer nötig sind.
 - Da die Formulareblatt hat einen grössere Laufweg und geht somit zu mehrere Personen.
 
@@ -63,13 +63,16 @@ Zu der Programmierung muss man Wöchentlich das erarbeitete und neu erlernte in 
 
 ### Model
 
-- Klasse Person
-- Klasse Reisedaten
-- Klasse Reiseziel
-- Klasse Reisezweck
-- Klasse ÖV
-- Klasse Flugzeug
-- Klasse Auto
+- Klasse Person - Attributen: Vorname, Nachname
+- Klasse Reiseinformationen - Attributen: Resedaten, Reiseziel, Reisezweck
+
+Entweder:
+- Klasse Reisemittel - Attributen: ÖV, Flugzeug, Auto
+
+Oder:
+- Klasse ÖV - Attributen: Abo
+- Klasse Flugzeug - Attributen: Fluggesellschaft, Preis
+- Klasse Auto - Attributen: Fahrzeug
 
 ### View
 
@@ -83,11 +86,11 @@ Zu der Programmierung muss man Wöchentlich das erarbeitete und neu erlernte in 
 
 ### Controller
 
-- Button bei Reisemittel (interaktiv) 
+- Button bei Reisemittel (interaktiv)
 - Arrays
 - Konstrucktor
 - Tabelle
-- Selectfeld 
+- Selectfeld
 - Dropdown
 - Verbindung mit Datenbank
 - evt. digitaler Signatur
@@ -103,7 +106,7 @@ Zu der Programmierung muss man Wöchentlich das erarbeitete und neu erlernte in 
 
 ### Layout
 Im Layout werde alle Twig-Html Sites eingebunden. Wie Header, Main und Footer.
-Dies dient dazu, das man nicht immer das gleiche einbinden wiederholt ausführen. 
+Dies dient dazu, das man nicht immer das gleiche einbinden wiederholt ausführen.
 
 ***
 
@@ -136,5 +139,3 @@ Was es sicher beinhaltet ist zu einem:
 - Select Boxes
 - Dropdown
 - Tabelle (Array)
-
-
