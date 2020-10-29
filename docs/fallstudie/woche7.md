@@ -1,7 +1,6 @@
 # Testzenario
 
 ## Szenario 1:   Personeninformationen erfassen
-
 Er geht auf die Hompage klickt auf das Text Imput Feld das oben mit Vornamen beschriftet ist und gibt sein Vornamen ein. Danach klickt auf das Text Imput Feld das oben mit Nachnamen beschriftet ist und gibt sein Nachnamen ein und folgt dem Flow bis zu den Reisedaten.
 
 
@@ -9,7 +8,6 @@ Er geht auf die Hompage klickt auf das Text Imput Feld das oben mit Vornamen bes
 <br>
 
 ## Szenario 2:   Reisedaten wählen
-
 Er geht beim Formular auf den nächsten Schritt bei dem man die Reisedaten wählen kann. Er klick auf den Datapcker für die Hinreise und gibt das Hinreisedatum aus. Danach geht er auf den Datapicker für die Rückreise und gibt sein Rückreise Datum aus und folgt dem Flow bis zum Reiseziel.
 
 <br>
@@ -17,7 +15,7 @@ Er geht beim Formular auf den nächsten Schritt bei dem man die Reisedaten wähl
 
 
 ## Szenario 3:   Reiseziel eintragen
-Er klickt auf das Text Imput Feld das oben mit Reiseziel beschriftet ist und trägt sein Reiseziel in das ImputFeld ein und folgt dem Flow bis zum Reisezweck.
+Er klickt auf das Text Imput Feld das oben mit Reiseziel beschriftet ist und trägt sein Reiseziel in das Imput Feld ein und folgt dem Flow bis zum Reisezweck.
 
 
 <br>
