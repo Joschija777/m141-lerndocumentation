@@ -1,6 +1,8 @@
 # Concept Map
 
 
+# Woche 10-11 (LB2)
+
 ```plantuml
 
 
@@ -45,6 +47,35 @@
 (FunktionaleAnforderung)
 (Testszenario)
 (Testfall)
+
+(if-Funktion_bei_Twig)
+(Mocking_von_Daten)
+(Rendern_von_View)
+(empty()-Funktion)
+(santizen_von_Daten)
+
+(if-Funktion_bei_Twig) <--> (View)
+(if-Funktion_bei_Twig) <--> (Funktionen)
+(Mocking_von_Daten) <--> (HTML)
+(Mocking_von_Daten) <--> (PHP)
+(Mocking_von_Daten) <--> (MVC)
+(Mocking_von_Daten) ---> (Model)
+(Mocking_von_Daten) ---> (Funktionen)
+(Rendern_von_View) <--> (HTML)
+(Rendern_von_View) <--> (PHP)
+(Rendern_von_View) <--> (MVC)
+(Rendern_von_View) <--> (View)
+(Rendern_von_View) <--> (SSR)
+(empty()-Funktion) <--> (PHP)
+(empty()-Funktion) <--> (MVC)
+(empty()-Funktion) <--> (Controller)
+(empty()-Funktion) <--> (Formular)
+(empty()-Funktion) <--> (Funktionen)
+(santizen_von_Daten) <--> (Funktionen)
+(santizen_von_Daten) <--> (Controller)
+(santizen_von_Daten) <--> (PHP)
+(santizen_von_Daten) <--> (MVC)
+
 
 (Testszenario) <--> (Testfall)
 (FunktionaleAnforderung) <--> (MVC)
@@ -133,19 +164,55 @@
 
 
 
-note right of (Testszenario) 
-  Beschreibt die Testumgebung und die Aktion die 
+
+
+
+
+
+
+note right of (if-Funktion_bei_Twig)
+  Die ifAnweisung in Twig ist vergleichbar mit den
+  if-Anweisungen von PHP.
+end note
+
+note right of (Mocking_von_Daten)
+  Dieser Ansatz wird allgemein als Testen mit Scheindaten
+  oder einfach als „ Verspotten “ bezeichnet. Scheindaten
+  sind gefälschte Daten, die künstlich in eine Software eingefügt werden
+end note
+
+note right of (Rendern_von_View)
+  Beim Rendern einer Ansicht wird dem Benutzer
+  oder Browser eine Ansicht angezeigt, z. B. ein HTML-Teil.
+end note
+
+note right of (empty()-Funktion)
+  Prüft, ob eine Variable einen Wert enthält
+end note
+
+note right of (santizen_von_Daten)
+  Sanntizt ist ein Filter bei PHP um Zeichen, Buchstaben,...
+  die man halt filtern möchte zu löschen.
+end note
+
+
+
+
+
+
+note right of (Testszenario)
+  Beschreibt die Testumgebung und die Aktion die
   überprüft werden soll
 end note
 
-note right of (Testfall) 
+note right of (Testfall)
   Beschreiben konkret, welcher Button wie/wann/was auslösen soll
 end note
 
-note right of (FunktionaleAnforderung) 
-  In der Technik ist eine Anforderung eine Aussage 
-  über eine zu erfüllende Eigenschaft oder zu 
-  erbringende Leistung eines Produktes, 
+note right of (FunktionaleAnforderung)
+  In der Technik ist eine Anforderung eine Aussage
+  über eine zu erfüllende Eigenschaft oder zu
+  erbringende Leistung eines Produktes,
   Systems oder Prozesses.
 end note
 
@@ -156,16 +223,16 @@ end note
 
 
 note right of (Use-Case)
-  Ein Use Case bündelt alle möglichen Szenarien, 
-  die eintreten können, wenn ein Akteur versucht, mit 
-  Hilfe des betrachteten Systems ein bestimmtes 
+  Ein Use Case bündelt alle möglichen Szenarien,
+  die eintreten können, wenn ein Akteur versucht, mit
+  Hilfe des betrachteten Systems ein bestimmtes
   fachliches Ziel zu erreichen.
 end note
 
 note right of (Template-Engine)
-  Eine Template-Engine ist eine Software, 
-  die eine Vorlagen-Datei verarbeitet und 
-  bestimmte Platzhalter darin ähnlich wie bei einem 
+  Eine Template-Engine ist eine Software,
+  die eine Vorlagen-Datei verarbeitet und
+  bestimmte Platzhalter darin ähnlich wie bei einem
   Formular durch jeweils aktuelle Inhalte ersetzt.
 end note
 
