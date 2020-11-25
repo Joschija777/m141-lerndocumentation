@@ -5,3 +5,7 @@
 * [Model View Controller](fallstudie/woche1.md)
 * [Template Engine Twig](fallstudie/woche2.md)
 * [SSR & CSR](fallstudie/woche3.md)
+* [Prepared-Statements - LB3](fallstudie/woche8.md)
+* [Vergleich PPS & traditionellem Zugrif - LB3](fallstudie/woche9.md)
+* [Anwendung sql-Scripts - LB3](fallstudie/woche10.md)
+

@@ -1,7 +1,7 @@
 # Concept Map
 
 
-# Woche 10-11 (LB2)
+# Woche 12-13 (LB3)
 
 ```plantuml
 
@@ -51,8 +51,40 @@
 (if-Funktion_bei_Twig)
 (Mocking_von_Daten)
 (Rendern_von_View)
-(empty()-Funktion)
+(empty-Funktion)
 (santizen_von_Daten)
+
+(mysql-DV)
+(mysqli-DV)
+(PDO-Datenverbindung)
+(PostgreSQL)
+(MySQL)
+(Prepared-Statement)
+(SQL-Injection)
+
+
+(mysql-DV) <--> (mysqli-DV)
+(mysql-DV) <--> (PHP)
+(mysql-DV) <--> (PDO-Datenverbindung)
+(mysql-DV) <--- (SQL-Injection)
+(mysql-DV) <--> (MySQL)
+(mysqli-DV) <--> (MySQL)
+(mysqli-DV) <--> (PHP)
+(mysqli-DV) <--> (PDO-Datenverbindung)
+(mysqli-DV) <--> (PostgreSQL)
+(mysqli-DV) <--> (MySQL)
+(mysqli-DV) <--> (Prepared-Statement)
+(mysqli-DV) <--> (SQL-Injection)
+(PDO-Datenverbindung) <--> (PostgreSQL)
+(PDO-Datenverbindung) <--> (MySQL)
+(PDO-Datenverbindung) <--> (SQL-Injection)
+(PostgreSQL) <--> (Prepared-Statement)
+(PostgreSQL) <--> (SQL-Injection)
+(MySQL) <--> (Prepared-Statement)
+(MySQL) <--> (SQL-Injection)
+(MySQL) <--> (PHP)
+(Prepared-Statement) <--> (SQL-Injection)
+
 
 (if-Funktion_bei_Twig) <--> (View)
 (if-Funktion_bei_Twig) <--> (Funktionen)
@@ -66,11 +98,11 @@
 (Rendern_von_View) <--> (MVC)
 (Rendern_von_View) <--> (View)
 (Rendern_von_View) <--> (SSR)
-(empty()-Funktion) <--> (PHP)
-(empty()-Funktion) <--> (MVC)
-(empty()-Funktion) <--> (Controller)
-(empty()-Funktion) <--> (Formular)
-(empty()-Funktion) <--> (Funktionen)
+(empty-Funktion) <--> (PHP)
+(empty-Funktion) <--> (MVC)
+(empty-Funktion) <--> (Controller)
+(empty-Funktion) <--> (Formular)
+(empty-Funktion) <--> (Funktionen)
 (santizen_von_Daten) <--> (Funktionen)
 (santizen_von_Daten) <--> (Controller)
 (santizen_von_Daten) <--> (PHP)
@@ -167,6 +199,47 @@
 
 
 
+note right of (mysql-DV)
+ Um die MySQL Datenbank nutzen zu können, 
+ muss eine Verbindung zwischen PHP und MySQL 
+ hergestellt werden. "veraltet"
+end note
+
+note right of (mysqli-DV)
+    MySQLi ist ein Ersatz für die mysql-Funktionen, 
+    mit objektorientierten und prozeduralen Versionen.
+end note
+
+note right of (PDO-Datenverbindung)
+    PHP Data Objects ist eine allgemeine 
+    Datenbankabstraktionsschicht mit Unterstützung 
+    für MySQL und vielen anderen Datenbanken.
+end note
+
+note right of (PostgreSQL)
+    PostgreSQL, oft kurz Postgres genannt, 
+    ist ein freies, objektrelationales 
+    Datenbankmanagementsystem.
+end note
+
+note right of (MySQL)
+    MySQL ist eines der weltweit verbreitetsten 
+    relationalen Datenbankverwaltungssysteme.
+end note
+
+note right of (Prepared-Statement)
+    Ein Prepared Statement ist eine Form der 
+    Datenbankanweisung, die ohne Werte vorkompiliert 
+    im Datenbanksystem vorliegt und nur noch mit den 
+    gewünschten Werten versehen werden muss.
+end note
+
+note right of (SQL-Injection)
+    SQL-Injection ist das Ausnutzen einer Sicherheitslücke
+    in Zusammenhang mit SQL-Datenbanken
+end note
+
+
 
 
 
@@ -186,7 +259,7 @@ note right of (Rendern_von_View)
   oder Browser eine Ansicht angezeigt, z. B. ein HTML-Teil.
 end note
 
-note right of (empty()-Funktion)
+note right of (empty-Funktion)
   Prüft, ob eine Variable einen Wert enthält
 end note
 

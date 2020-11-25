@@ -48,8 +48,9 @@
 (if-Funktion_bei_Twig)
 (Mocking_von_Daten)
 (Rendern_von_View)
-(empty()-Funktion)
+(empty-Funktion)
 (santizen_von_Daten)
+
 
 (if-Funktion_bei_Twig) <--> (View)
 (if-Funktion_bei_Twig) <--> (Funktionen)
@@ -63,11 +64,11 @@
 (Rendern_von_View) <--> (MVC)
 (Rendern_von_View) <--> (View)
 (Rendern_von_View) <--> (SSR)
-(empty()-Funktion) <--> (PHP)
-(empty()-Funktion) <--> (MVC)
-(empty()-Funktion) <--> (Controller)
-(empty()-Funktion) <--> (Formular)
-(empty()-Funktion) <--> (Funktionen)
+(empty-Funktion) <--> (PHP)
+(empty-Funktion) <--> (MVC)
+(empty-Funktion) <--> (Controller)
+(empty-Funktion) <--> (Formular)
+(empty-Funktion) <--> (Funktionen)
 (santizen_von_Daten) <--> (Funktionen)
 (santizen_von_Daten) <--> (Controller)
 (santizen_von_Daten) <--> (PHP)
@@ -183,7 +184,7 @@ note right of (Rendern_von_View)
   oder Browser eine Ansicht angezeigt, z. B. ein HTML-Teil.
 end note
 
-note right of (empty()-Funktion)
+note right of (empty-Funktion)
   Prüft, ob eine Variable einen Wert enthält
 end note
 
