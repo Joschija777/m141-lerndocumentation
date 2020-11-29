@@ -197,37 +197,37 @@
 
 
 note right of (mysql-DV)
- Um die MySQL Datenbank nutzen zu können, 
- muss eine Verbindung zwischen PHP und MySQL 
+ Um die MySQL Datenbank nutzen zu können,
+ muss eine Verbindung zwischen PHP und MySQL
  hergestellt werden. "veraltet"
 end note
 
 note right of (mysqli-DV)
-    MySQLi ist ein Ersatz für die mysql-Funktionen, 
+    MySQLi ist ein Ersatz für die mysql-Funktionen,
     mit objektorientierten und prozeduralen Versionen.
 end note
 
 note right of (PDO-Datenverbindung)
-    PHP Data Objects ist eine allgemeine 
-    Datenbankabstraktionsschicht mit Unterstützung 
+    PHP Data Objects ist eine allgemeine
+    Datenbankabstraktionsschicht mit Unterstützung
     für MySQL und vielen anderen Datenbanken.
 end note
 
 note right of (PostgreSQL)
-    PostgreSQL, oft kurz Postgres genannt, 
-    ist ein freies, objektrelationales 
+    PostgreSQL, oft kurz Postgres genannt,
+    ist ein freies, objektrelationales
     Datenbankmanagementsystem.
 end note
 
 note right of (MySQL)
-    MySQL ist eines der weltweit verbreitetsten 
+    MySQL ist eines der weltweit verbreitetsten
     relationalen Datenbankverwaltungssysteme.
 end note
 
 note right of (Prepared-Statement)
-    Ein Prepared Statement ist eine Form der 
-    Datenbankanweisung, die ohne Werte vorkompiliert 
-    im Datenbanksystem vorliegt und nur noch mit den 
+    Ein Prepared Statement ist eine Form der
+    Datenbankanweisung, die ohne Werte vorkompiliert
+    im Datenbanksystem vorliegt und nur noch mit den
     gewünschten Werten versehen werden muss.
 end note
 
