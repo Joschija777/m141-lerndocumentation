@@ -7,9 +7,19 @@
 > [!NOTE|style:flat]
 Hier habe ich meine Tabellen angelegt localhost:8080
 
+### Export Tabeller erstellen
+<img width="100%" src='./bilder/export.png'></img>
+
+
+### Export Beispieldaten erstellen
+<img width="100%" src='./bilder/export2.png'></img>
+
 
 ### Beispiel Daten & Strucktur
 <img width="100%" src='./bilder/beispieldaten.png'></img>
+
+### Schnell Tabelle erstellen
+<img width="100%" src='./bilder/tabelleEr.png'></img>
 
 
 <br>
