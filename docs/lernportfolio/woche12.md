@@ -43,6 +43,7 @@ Zu kompliziert Gestalten mit MYSQL, könnte man viel besser erklären.
 <br>
 
 ## Wie ist es mir ergangen?
+Heute bin ich gut vorwärts gekommen, da ich ja beide Lektionen Zeit hatte daran zuarbeiten.
 
 <br>
 <br>

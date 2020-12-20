@@ -25,7 +25,7 @@ Zudem fand ich gut das man die LB in 4 Abgaben aufgeteilt hat und jede Abgabe mi
 
 ## Wie ist es mir ergangen?
 Heute bin ich gut vorwärts gekommen, da ich ja beide Lektionen Zeit hatte daran zuarbeiten. 
-Da ich auch der Grösste Teil der Abgabe 1 schon erledigt hatte, musste ich mich nicht Stressen lassen.
+Da ich auch der Grösste Teil der Abgabe 3 schon erledigt hatte, musste ich mich nicht Stressen lassen.
 
 <br>
 <br>
