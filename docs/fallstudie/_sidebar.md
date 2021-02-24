@@ -8,4 +8,5 @@
 * [Prepared-Statements - LB3](fallstudie/woche8.md)
 * [Vergleich PPS & traditionellem Zugrif - LB3](fallstudie/woche9.md)
 * [Anwendung sql-Scripts - LB3](fallstudie/woche10.md)
+* [Testfälle - LB4](fallstudie/woche11.md)
 
