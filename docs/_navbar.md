@@ -1,3 +1,3 @@
 * [Home](/)
-* [Fallstudie](/fallstudie/)
-* [Lernportfolio](/lernportfolio/)
+* [Projektarbeit](/projektarbeit/)
+* [Lerndokumentation](/lerndokumentation/)
