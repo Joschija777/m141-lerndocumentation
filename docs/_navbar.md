@@ -1,3 +1,5 @@
 * [Home](/)
 * [Projektarbeit](/projektarbeit/)
+* [Installation & Konfiguration](/installation/)
+* [SQL Befehle](/sql/)
 * [Lerndokumentation](/lerndokumentation/)
