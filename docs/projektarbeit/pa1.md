@@ -141,34 +141,75 @@ __Sustain__
 
 __Betriebsystem:__
 
+<img width="80%" src='./bilder/OS_Version.png'></img>
+
+> [!NOTE|style:flat]
+> OS Version: Linux Ubuntu 64GB
+
 <br>
 
 __Hardware:__
 
+<img width="80%" src='./bilder/Konfiguration_VM2.png'></img>
+
+<img width="80%" src='./bilder/Konfiguration_VM1.png'></img>
+
+> [!NOTE|style:flat]
+> - CPU: 1 Prozessor
+> - RAM: 4096 MB
+> - Grafikspeicher: 16MB
+> - SSD: 10GB
+> - Notebook
+
+<br>
 <br>
 
 #### 1.2.2 OS Version & Kernel
 
 __OS Version:__
 
+```Terminal
+lsb_release -a
+```
+
+<img width="100%" src='./bilder/osVersion.png'></img>
+
 <br>
 
 __Kernel:__
+
+```Terminal
+hostnamectl | grep Kernel
+```
+
+<img width="100%" src='./bilder/kernel.png'></img>
 
 <br>
 
 #### 1.2.3 Installations Quelle
 
+> [!TIP|style:flat]
+> Download Ubuntu Server (neuste Version): https://ubuntu.com/download/server
+
+<br>
 <br>
 
 #### 1.2.4 Software Version & Abhängigkeiten
 
 __Software Version:__
 
+```Terminal
+mysql -V
+```
+
+<img width="100%" src='./bilder/mysqlVersion.png'></img>
+
 <br>
+
 
 __Abhängigkeit:__
 
+<br>
 <br>
 
 #### 1.2.5 Sonstige Serverdienste
@@ -181,15 +222,54 @@ __Abhängigkeit:__
 
 ## 1.3 Prozess der Installation
 
+#### 1.3.1 Software Version & Abhängigkeiten
 
-## 2.1 Installation
+<br>
+<br>
 
-```
-sudo apt update
-```
+#### 1.3.2 Installations Ablauf & Installationsschritte
 
+__1. Ubuntu update und upgrade:__
+
+```Terminal
+sudo apt-get update && apt-get uprade
 ```
+<img width="100%" src='./bilder/mysql_1.png'></img>
+
+<img width="100%" src='./bilder/mysql_2.png'></img>
+
+> [!WARNING|style:flat]
+> Befor man die Installtion mysql startet sollte man ubuntu und alle Packes auf den neusten Stand bringen. 
+
+<br>
+
+__2. Installation MYSQL:__
+
+```Terminal
 sudo apt install mysql-server
 ```
 
-## 2.2 Konfiguration
+<img width="100%" src='./bilder/mysql_3.png'></img>
+
+<br>
+
+__3. Konfiguration MYSQL:__
+
+```Terminal
+sudo mysql_secure_installation
+```
+<img width="100%" src='./bilder/mysql_4.png'></img>
+
+<img width="100%" src='./bilder/mysql_5.png'></img>
+
+> [!NOTE|style:flat]
+> 1. Yes (Y)
+> 2. Strong (2)
+> 3. Root Password
+
+<br>
+<br>
+<br>
+<br>
+
+## 1.4
