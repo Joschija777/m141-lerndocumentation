@@ -103,6 +103,8 @@ Dokumentieren Sie wie eine Storage Engine auf eine Tabelle angwendet wird
 
 ### 2.2.1 Root-Benutzer konfiguriert (Login/Passwort)
 
+__Users anzeigen:__
+
 ```mysql
 use mysql;
 select user,host,authentication_string from user;
