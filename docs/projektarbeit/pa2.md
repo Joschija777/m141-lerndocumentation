@@ -4,7 +4,7 @@
 
 ## 2.1 Storage Engines bei MySQL
 
-#### 2.1.1 Storage-Engines unter MySQL
+#### 2.1.1 Storage-Engines
 Dokumentieren 2 wichtigesten Storage-Engines genau beschrieben:
 
 - __InnoDB__
@@ -61,26 +61,38 @@ __Liste:__
 
 - __BLACKHOLE:__ Die BLACKHOLESpeicher-Engine fungiert als „ Schwarzes Loch “ , das Daten akzeptiert, aber wegwirft und nicht speichert. Abfragen geben immer ein leeres Ergebnis zurück.
 
-- __MRG-MYISAM:__
+- __FEDERATED:__ Mit dem Storage-Engine können Sie auf Daten aus einer entfernten MySQL-Datenbank zugreifen, ohne Replikations- oder Clustertechnologie zu verwenden. Beim Abfragen einer lokalen Tabelle werden die Daten automatisch aus den entfernten (verbundierten) Tabellen abgezogen. In den lokalen Tabellen werden keine Daten gespeichert. FEDERATEDFEDERATED
 
-- __FEDERATED:__
+- __PERFORMANCE-SCHEMA:__ Das Leistungsschema bietet eine Möglichkeit, die interne Ausführung des Servers zur Laufzeit zu überprüfen. Sie wird mithilfe des PERFORMANCE_SCHEMA Speichermoduls und der Datenbank implementiert. Das Leistungsschema konzentriert sich in erster Linie auf Leistungsdaten
 
-- __PERFORMANCE-SCHEMA:__
+- __MEMORY:__ Das Speichermodul erstellt Spezielle Tabellen mit Inhalten, die im Speicher gespeichert sind. Da die Daten anfällig für Abstürze, Hardwareprobleme oder Stromausfälle sind, verwenden Sie diese Tabellen nur als temporäre Arbeitsbereiche oder schreibgeschützte Caches für Daten, die aus anderen Tabellen gezogen werden
 
-- __MEMORY:__
-
-- __CSV:__
+- __CSV:__ Das CSV-Speichermodul speichert Daten in Textdateien im Format "Durchkommasgetrennte Werte". Die CSV-Speicher-Engine wird immer in den MySQL-Server kompiliert. Um die Quelle für das CSV-Modul zu untersuchen, suchen Sie im Speicher-/csv-Verzeichnis einer MySQL-Quellverteilung.
 
 
 <br>
 <br>
 
-#### 2.1.3 Machen Sie sich Gedanken welche Daten aus Ihrem Projekt mit welcher Storage Engine verwaltet werden könnten. Begründen Sie Ihr Gedanken.
+#### 2.1.3 Datenanwendung Storage Enginge 
+
+Engine | Anwendung  | Begründung
+:-------- | :---------- | :----------
+InnoDB | Bankdaten, Kundendaten | ACID, Commit, Rollback, Crash-Recovery, keine Daten verloren
+MyISAM   | Webanwendungen   | Schnelle Speicher-Engine, leselastigen Anwendungen, Volltextsuchindizes
+ARCHIVE | Archivieren und Abrufen vergangener Daten | Tabellen werden nicht indiziert, und die Komprimierung erfolgt beim Einfügen
+BLACKHOLE  | verteilten Datenbankumgebung     | Akzeptiert aber speichert keine Daten, Abfragen immer einen leeren Satz zurück
+FEDERATED | einzelnen, lokalen, logischen Datenbank |  Keine Daten gespeichert und Abfragen automatisch auf Remote-Server
+PERFORMANCE-SCHEMA   | Monitoring    | Leistungsdaten, überwacht Serverereignisse
+MEMORY | für temporäre Tabellen mit externen Abfragedaten | Speichert Daten im RAM, gleichzeitige Datenzugriff wird synchronisiert.
+CSV   | CSV-formatierte Daten   |  Sobald man eine CSV Datei importieren möchte 
+
+> [!TIP|style:flat]
+> In den meisten Fällen verwendet man InnoDB = default oder MyISAM
 
 <br>
 
-### 2.1.4 Dokumentieren Sie wie eine Storage Engine auf eine Tabelle angwendet wird
-
+#### 2.1.4 Tabelleanwendung Storage Engine
+Dokumentieren Sie wie eine Storage Engine auf eine Tabelle angwendet wird
 <br>
 <br>
 <br>
