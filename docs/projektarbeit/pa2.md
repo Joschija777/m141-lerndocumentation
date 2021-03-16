@@ -9,9 +9,19 @@ Dokumentieren 2 wichtigesten Storage-Engines genau beschrieben:
 
 - __InnoDB__
 ist ein freies Speichersubsystem für das Datenbankmanagementsystem MySQL. Sein Hauptvorteil gegenüber anderen Speichersubsystemen für MySQL ist, dass Transaktionssicherheit und referenzielle Integrität über Fremdschlüssel gewährleistet werden.
-InnoDB-Tabellen sind die Standard-Tabelle seit MySQL 5.6. Sie sind optimal für eine maximale Leistung bei der Bearbeitung von grossen Datenmengen. Sie sind transaktionssicher und sie beherrschen das sperren auf Zeilenebene, sowie auch ein konsistentes nicht sperrendes Lesen. Wenn die referenzierten Tabellen denselben Typ haben, wird sogar eine referenzielle Integrität unterstützt. Man ist nicht an die maximale Dateigrösse des Systemgeknüpft, da die Tabellen in einem eigenen Tabellenplatz, welcher aus mehreren Dateien bestehen kann, bestehen.
+Sie sind optimal für eine maximale Leistung bei der Bearbeitung von grossen Datenmengen. Sie sind transaktionssicher und sie beherrschen das sperren auf Zeilenebene, sowie auch ein konsistentes nicht sperrendes Lesen. Wenn die referenzierten Tabellen denselben Typ haben, wird sogar eine referenzielle Integrität unterstützt. Man ist nicht an die maximale Dateigrösse des Systemgeknüpft, da die Tabellen in einem eigenen Tabellenplatz, welcher aus mehreren Dateien bestehen kann, bestehen.
+
+    InnoDB entspricht dem ACID-Standard (Atomicity Consistency Isolation Durability). Alle Transaktionen laufen voneinander isoliert ab, aber es können beliebig viele Anwendungen gleichzeitig Daten in eine Tabelle schreiben. Bei der Datenabfrage, dem SELECT, hat InnoDB deutlich die Nase vorne, aber bei den Schreibzugriffen auf eine Datenbank, den INSERT und UPDATE, ist MyISAM etwas schneller.
+
+    - __ACID__ 
+
+        - Atomicity oder Atomarität: Ausführung aller oder keiner Informationsteile einer Transaktion
+        - Consistency oder Konsistenz: Transaktionen erzeugen einen gültigen Zustand oder fallen in den alten Zustand zurück
+        - Isolation oder Abgrenzung: Transaktionen verschiedener Anwender oder Prozesse bleiben voneinander isoliert
+        - Durability oder Dauerhaftigkeit: Nach einer erfolgreichen Transaktion bleiben die Daten dauerhaft gespeichert
 
 
+<br>
 <br>
 
 - __MyISAM__
@@ -22,6 +32,11 @@ Bei der MyISAM Tabelle gibt es drei verschiedene Arten, es gibt die Statische, d
     Die zweite Variante ist die Dynamische. Wie bereits gesagt braucht die Dynamische weniger Speicherplatz als die Statische, den hier werden die Datensätze fragmentiert wenn sie grösser werden.
 
     Die letzte Variante ist die Komprimierte, sie ist für die Statische und die Dynamische verfügbar. Die Daten werden komprimiert abgespeichert und können nur gelesen werden.
+
+    ISAM steht für Indexed Sequential Access Method (dt. Index-sequenzielle Zugriffsmethode) – es ist also nicht möglich, dass mehrere User oder Anwendungen gleichzeitig in einer Tabelle schreiben. Das sequenzielle Speichern erlaubt immer nur den Schreibzugriff durch eine Anwendung.
+
+    - __ISAM__
+    Index Sequential Access Method (ISAM) ist eine von IBM entwickelte Zugriffsmethode für Datensätze einer Datei, die sowohl (sortiert) sequentiellen als auch wahlfreien (random) index-basierten Zugriff zulässt.
 
 <br>
 <br>
@@ -76,6 +91,10 @@ __Liste:__
 
 ### 2.2.1 Root-Benutzer konfiguriert (Login/Passwort)
 
+```mysql
+use mysql;
+select user,host,authentication_string from user;
+```
 
 <br>
 
