@@ -412,7 +412,19 @@ SHOW SESSION STATUS;
 <br>
 
 __Konfigurationen - systemweite Anpassungen__
-<img width="70%" src='./bilder/konfigurationmy.png'></img>
+
+
+File Name | Purpose  
+:-------- | :---------- 
+/etc/my.cnf |   Global options
+/etc/mysql/my.cnf   |   Global options
+SYSCONFDIR/my.cnf   |   Global options
+$MYSQL_HOME/my.cnf  |   Server-specific options (server only)
+defaults-extra-file |   The file specified with --defaults-extra-file, if any
+~/.my.cnf   |   User-specific options
+~/.mylogin.cnf  |   User-specific login path options (clients only)
+DATADIR/mysqld-auto.cnf |   System variables persisted with SET PERSIST or SE PERSIST_ONLY (server only)
+
 
 > [!TIP|style:flat]
 > Für Sie ist folgende Datei relevant
@@ -483,6 +495,48 @@ set session transaction isolation level read uncommitted;
 <br>
 
 #### 2.3.2 Exportieren Sie die aktuelle Liste an System-Variablen
+
+- Anzeige der aktuellen Werte
+
+```mysql
+SHOW VARIABLES;
+```
+
+```AUSGABE
++--------------------------------------------+------------------------------+
+| Variable_name                              | Value                        |
++--------------------------------------------+------------------------------+
+| activate_all_roles_on_login                | OFF                          |
+| auto_generate_certs                        | ON                           |
+| auto_increment_increment                   | 1                            |
+| auto_increment_offset                      | 1                            |
+| autocommit                                 | ON                           |
+| automatic_sp_privileges                    | ON                           |
+| avoid_temporal_upgrade                     | OFF                          |
+| back_log                                   | 151                          |
+| basedir                                    | /usr/                        |
+| big_tables                                 | OFF                          |
++--------------------------------------------+------------------------------+
+etc ...
+```
+
+- Zeige alles an was irgendwie mit "size" heisst
+```mysql
+SHOW VARIABLES LIKE '%size%';
+```
+
+- Status Variablen Global
+```mysql
+SHOW GLOBAL STATUS;
+```
+
+- Status Variablen für Sessions
+```mysql
+SHOW SESSION STATUS;
+```
+
+
+
 
 <br>
 <br>
