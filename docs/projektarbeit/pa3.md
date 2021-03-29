@@ -83,15 +83,49 @@ __ERM__
 
 #### 3.2.1 Syntax eingehalten
 
+```SQL
+CREATE TABLE IF NOT EXISTS roehFix.gatways (
+  gatwaysID INT NOT NULL,
+  kennung VARCHAR(20) NOT NULL,
+  laengeKoordinaten FLOAT NOT NULL,
+  breiteKoordinaten FLOAT NOT NULL,
+  beschreibung LONGTEXT NULL,
+  kundenNr VARCHAR(8) NOT NULL,
+  PRIMARY KEY (gatwaysID),
+  FOREIGN KEY (kundenNr) REFERENCES roehFix.kunden(kundenNr),
+  UNIQUE KEY unique_kennung (kennung))
+ENGINE = InnoDB;
+```
+
+> [!TIP|style:flat]
+> CamelCase = Bei Camel Case wird das erste Wort immer klein geschrieben und jedes folgende Wort mit einem Großbuchstaben begonnen, ohne dass dazwischen ein Leerzeichen oder ein anderes Trennzeichen kommt.
+
 <br>
 <br>
 
 #### 3.2.2 Datentypen zweckmässig / angepasst
 
+__Verwendete Datentypen erklärt:__
+
+Datentyp | Verwendung im Projekt  | Beschreibung  
+:-------- | :---------- | :---------- 
+VARCHAR |  E-Mail,  Telefonnummer(wegen 0 kein Double), Strasse, Stadt, Name,   |    Zeichenkette variabler Länge, Maximum ist M. Wertebereich für M: 0 bis 255.
+INT |  Primary Key wie(ID), FOREIGN KEY   |    Ganzzahlen von 0 bis ~4,3 Mill. oder von -2.147.483.648 bis 2.147.483.647.
+SMALLINT |  Kleine Zahlen wie(Postleizahl)   |    	Ganzzahlen von 0 bis 65.535 oder von -32.768 bis 32.767.
+FLOAT |  Daten, Temperatur, BreiteKoordinaten, LaengeKoordinaten   |    	Fließkommazahl mit Vorzeichen. Wertebereich von -(3,402823466×1038) bis -(1,175494351×10-38)
+
+
+
 <br>
 <br>
 
 #### 3.2.3 Inhaltlich korrekt (Anforderungen abgedeckt)
+
+__Zu den Anforderungen:__
+
+<img width="60%" src='./bilder/Anforderungen.png'></img>
+
+https://moodle.bztf.ch/pluginfile.php/106086/mod_resource/content/1/site/02_PA_18-22/712_PA3/
 
 <br>
 <br>
@@ -104,25 +138,25 @@ __ERM__
 ~~~SQL
 
 -- -----------------------------------------------------
--- Datenbank erstellen RoehFix
+-- Datenbank erstellen roehFix
 -- Datenbank auswählen
 -- -----------------------------------------------------
-CREATE DATABASE IF NOT EXISTS RoehFix DEFAULT CHARACTER SET utf8 ;
-USE RoehFix ;
+CREATE DATABASE IF NOT EXISTS roehFix DEFAULT CHARACTER SET utf8 ;
+USE roehFix ;
 
 -- -----------------------------------------------------
--- Tabelle RoehFix.Kontaktdaten erstellen
+-- Tabelle roehFix.Kontaktdaten erstellen
 -- Attribute (KontaktdatenID, Telefonnummer, Email) hinzufügen
 -- Primärschlüssel definieren (KontaktdatenID)
 -- Indexierung für schnellere Suche (Telefonnummer, Email)
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS RoehFix.Kontaktdaten (
-  KontaktdatenID INT NOT NULL,
-  Telefonnummer VARCHAR(18) NOT NULL,
-  Email VARCHAR(45) NOT NULL,
-  PRIMARY KEY (KontaktdatenID),
-  INDEX (Telefonnummer ASC),
-  INDEX (Email ASC))
+CREATE TABLE IF NOT EXISTS roehFix.kontaktdaten (
+  kontaktdatenID INT NOT NULL,
+  telefonnummer VARCHAR(18) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  PRIMARY KEY (kontaktdatenID),
+  INDEX (telefonnummer ASC),
+  INDEX (email ASC))
 ENGINE = InnoDB;
 
 
@@ -132,106 +166,130 @@ ENGINE = InnoDB;
 -- Primärschlüssel definieren (AdressenID)
 -- Indexierung für schnellere Suche (Telefonnummer, Email)
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS RoehFix.Adressen (
-  AdressenID INT NOT NULL,
-  Strasse VARCHAR(30) NOT NULL,
-  PLZ SMALLINT(6) NOT NULL,
-  Stadt VARCHAR(20) NOT NULL,
-  PRIMARY KEY (AdressenID),
-  INDEX (Strasse ASC))
+CREATE TABLE IF NOT EXISTS roehFix.adressen (
+  adressenID INT NOT NULL,
+  strasse VARCHAR(30) NOT NULL,
+  plz SMALLINT(6) NOT NULL,
+  stadt VARCHAR(20) NOT NULL,
+  PRIMARY KEY (adressenID),
+  INDEX (strasse ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table RoehFix.Kunden
+-- Tabelle RoehFix.Kunden erstellen
+-- Attribute (KundenID, Vorname, Nachname) hinzufügen
+-- Primärschlüssel definieren (KundenID)
+-- Foreign Key(Technische_Kontaktdaten,  Administrative_Kontaktdaten, Kontaktadresse, Rechnungsadresse)
+-- Indexierung für schnellere Suche (Vorname, Nachname)
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS RoehFix.Kunden (
-  KundenNr VARCHAR(8) NOT NULL,
-  Vorname VARCHAR(25) NOT NULL,
-  Nachname VARCHAR(25) NOT NULL,
-  Technische_Kontaktdaten INT NOT NULL,
-  Administrative_Kontaktdaten INT NOT NULL,
-  Kontaktadresse INT NOT NULL,
-  Rechnungsadresse INT NOT NULL,
-  PRIMARY KEY (KundenNr),
-  FOREIGN KEY (Technische_Kontaktdaten REFERENCES RoehFix.Kontaktdaten(KontaktdatenID),
-  FOREIGN KEY (Administrative_Kontaktdaten) REFERENCES RoehFix.Kontaktdaten(KontaktdatenID),
-  FOREIGN KEY (Kontaktadresse) REFERENCES RoehFix.Adressen(AdressenID),
-  FOREIGN KEY (Rechnungsadresse) REFERENCES RoehFix.Adressen(AdressenID),
-  INDEX (Vorname ASC),
-  INDEX (Nachname ASC))
+CREATE TABLE IF NOT EXISTS roehFix.kunden (
+  kundenNr VARCHAR(8) NOT NULL,
+  vorname VARCHAR(25) NOT NULL,
+  nachname VARCHAR(25) NOT NULL,
+  technischeKontaktdaten INT NOT NULL,
+  administrativeKontaktdaten INT NOT NULL,
+  kontaktAdresse INT NOT NULL,
+  rechnungsAdresse INT NOT NULL,
+  PRIMARY KEY (kundenNr),
+  FOREIGN KEY (technischeKontaktdaten) REFERENCES roehFix.kontaktdaten(kontaktdatenID),
+  FOREIGN KEY (administrativeKontaktdaten) REFERENCES roehFix.kontaktdaten(kontaktdatenID),
+  FOREIGN KEY (kontaktAdresse) REFERENCES roehFix.adressen(adressenID),
+  FOREIGN KEY (rechnungsAdresse) REFERENCES roehFix.adressen(adressenID),
+  INDEX (vorname ASC),
+  INDEX (nachname ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table RoehFix.Gatways
+-- Tabelle roehFix.Gatways erstellen
+-- Attribute (GatwaysID, Kennung, LKordinaten, BKordinate, Beschreibung) hinzufügen
+-- Primärschlüssel definieren (GatwaysID)
+-- Foreign Key(KundenNr)
+-- Indexierung für schnellere Suche (Kennung)
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS RoehFix.Gatways (
-  GatwaysID INT NOT NULL,
-  Kennung VARCHAR(20) NOT NULL,
-  LaengeKoordinaten FLOAT NOT NULL,
-  BreiteKoordinaten FLOAT NOT NULL,
-  Beschreibung LONGTEXT NULL,
-  KundenNr VARCHAR(8) NOT NULL,
-  PRIMARY KEY (GatwaysID),
-  FOREIGN KEY (KundenNr) REFERENCES RoehFix.Kunden(KundenNr),
-  INDEX (Kennung))
+CREATE TABLE IF NOT EXISTS roehFix.gatways (
+  gatwaysID INT NOT NULL,
+  kennung VARCHAR(20) NOT NULL,
+  laengeKoordinaten FLOAT NOT NULL,
+  breiteKoordinaten FLOAT NOT NULL,
+  beschreibung LONGTEXT NULL,
+  kundenNr VARCHAR(8) NOT NULL,
+  PRIMARY KEY (gatwaysID),
+  FOREIGN KEY (kundenNr) REFERENCES roehFix.kunden(kundenNr),
+  UNIQUE KEY unique_kennung (kennung))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table RoehFix.Sensoren
+-- Tabelle roehFix.Sensoren erstellen
+-- Attribute (SensorenID, Kennung, LKordinaten, BKordinate) hinzufügen
+-- Primärschlüssel definieren (SensorenID)
+-- Indexierung für schnellere Suche (Kennung)
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS RoehFix.Sensoren (
-  SensorenID INT NOT NULL,
-  Kennung VARCHAR(20) NOT NULL,
-  LaengeKoordination FLOAT NOT NULL,
-  BreiteKoordination FLOAT NOT NULL,
-  PRIMARY KEY (SensorenID))
+CREATE TABLE IF NOT EXISTS roehFix.sensoren (
+  sensorenID INT NOT NULL,
+  kennung VARCHAR(20) NOT NULL,
+  laengeKoordination FLOAT NOT NULL,
+  breiteKoordination FLOAT NOT NULL,
+  PRIMARY KEY (sensorenID),
+  UNIQUE KEY unique_kennung (kennung))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table RoehFix.Typ
+-- Tabelle roehFix.Typ erstellen
+-- Attribute (TypID, Heizung,Temperatur, Klima) hinzufügen
+-- Primärschlüssel definieren (TypID)
+-- Foreign Key(sensorenID)
+-- Indexierung für schnellere Suche (Heizung)
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS RoehFix.Typ (
-  TypID INT NOT NULL,
-  Heizung VARCHAR(25) NOT NULL,
-  Temperatur FLOAT NOT NULL,
-  Klima VARCHAR(30) NULL,
-  SensorenID INT,
-  PRIMARY KEY (TypID),
-  FOREIGN KEY (SensorenID) REFERENCES RoehFix.Sensoren(SensorenID),
-  INDEX (Heizung ASC))
+CREATE TABLE IF NOT EXISTS roehFix.typ (
+  typID INT NOT NULL,
+  heizung VARCHAR(25) NOT NULL,
+  temperatur FLOAT NOT NULL,
+  klima VARCHAR(30) NULL,
+  sensorenID INT,
+  PRIMARY KEY (typID),
+  FOREIGN KEY (sensorenID) REFERENCES roehFix.sensoren(sensorenID),
+  UNIQUE KEY unique_heizung (heizung ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table RoehFix.Sensordaten
+-- Tabelle roehFix.sensorendaten erstellen
+-- Attribute (sensorendatenID, Daten, Zeitpunkt) hinzufügen
+-- Primärschlüssel definieren (sensorendatenID)
+-- Foreign Key(sensorenID)
+-- Indexierung für schnellere Suche (Daten)
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS RoehFix.Sensordaten (
-  SensordatenID INT NOT NULL,
-  Daten FLOAT NOT NULL,
-  Zeitpunkt DATETIME(6) NOT NULL,
-  SensorenID INT NOT NULL,
-  PRIMARY KEY (SensordatenID),
-  FOREIGN KEY (SensorenID) REFERENCES RoehFix.Sensoren(SensorenID),
-  INDEX (Zeitpunkt ASC),
-  INDEX (Daten ASC))
+CREATE TABLE IF NOT EXISTS roehFix.sensordaten (
+  sensordatenID INT NOT NULL,
+  daten FLOAT NOT NULL,
+  zeitpunkt DATETIME(6) NOT NULL,
+  sensorenID INT NOT NULL,
+  PRIMARY KEY (sensordatenID),
+  FOREIGN KEY (sensorenID) REFERENCES roehFix.sensoren(sensorenID),
+  UNIQUE KEY unique_zeitpunkt (zeitpunkt ASC),
+  INDEX (daten ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table RoehFix.Gatways_has_Sensoren
+-- Zwischentabelle roehFix.gatwayshas_sensoren erstellen
+-- Attribute (gatwaysGatwaysID, sensorenSensorenID) hinzufügen
+-- Primärschlüssel definieren (gatwaysGatwaysID, sensorenSensorenID)
+-- Foreign Key(gatwaysGatwaysID, sensorenSensorenID)
+-- Indexierung für schnellere Suche (gatwaysGatwaysID, sensorenSensorenID)
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS RoehFix.Gatways_has_Sensoren (
-  Gatways_GatwaysID INT NOT NULL,
-  Sensoren_SensorenID INT NOT NULL,
-  PRIMARY KEY (Gatways_GatwaysID, Sensoren_SensorenID),
-  FOREIGN KEY (Gatways_GatwaysID) REFERENCES RoehFix.Gatways(GatwaysID),
-  FOREIGN KEY (Sensoren_SensorenID) REFERENCES RoehFix.Sensoren(SensorenID),
-  INDEX (Sensoren_SensorenID ASC),
-  INDEX (Gatways_GatwaysID ASC)
+CREATE TABLE IF NOT EXISTS roehFix.gatwaysHasSensoren (
+  gatwaysGatwaysID INT NOT NULL,
+  sensorenSensorenID INT NOT NULL,
+  PRIMARY KEY (gatwaysGatwaysID, sensorenSensorenID),
+  FOREIGN KEY (gatwaysGatwaysID) REFERENCES roehFix.gatways(gatwaysID),
+  FOREIGN KEY (sensorenSensorenID) REFERENCES roehFix.sensoren(sensorenID),
+  UNIQUE KEY unique_sensorenSensorenID (sensorenSensorenID ASC),
+  UNIQUE KEY unique_gatwaysGatwaysID (gatwaysGatwaysID ASC)
   )
 ENGINE = InnoDB;
 
@@ -239,181 +297,36 @@ ENGINE = InnoDB;
 
 ~~~
 
+<br>
+<br>
 
-~~~SQL
+#### Reproduzierbar:
 
--- -----------------------------------------------------
--- Datenbank erstellen RoehFix
--- Datenbank auswählen
--- -----------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `RoehFix` DEFAULT CHARACTER SET utf8 ;
-USE `RoehFix` ;
+1. Script ausführen (wurde vorher im TMP Verzeichnis erstellt)
 
--- -----------------------------------------------------
--- Table `RoehFix`.`Kontaktdaten`
+```sql
+source /tmp/roehFix.sql
+```
+<img width="100%" src='./bilder/myScript.png'></img>
 
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RoehFix`.`Kontaktdaten` (
-  idKontaktdaten INT NOT NULL,
-  `Telefonnummer` VARCHAR(18) NOT NULL,
-  `Email` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idKontaktdaten`),
-  UNIQUE INDEX `Telefonnummer_UNIQUE` (`Telefonnummer` ASC),
-  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC))
-ENGINE = InnoDB;
+<br>
 
+2. Kurzen Test!
 
--- -----------------------------------------------------
--- Table `RoehFix`.`Adressen`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RoehFix`.`Adressen` (
-  `idAdressen` INT NOT NULL,
-  `Strasse` VARCHAR(30) NOT NULL,
-  `PLZ` SMALLINT(6) NOT NULL,
-  `Stadt` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`idAdressen`),
-  UNIQUE INDEX `Strasse_UNIQUE` (`Strasse` ASC))
-ENGINE = InnoDB;
+```sql
+USE Databse;
+```
 
+```sql
+show tables;
+```
 
--- -----------------------------------------------------
--- Table `RoehFix`.`Kunden`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RoehFix`.`Kunden` (
-  `KundenNr.` VARCHAR(8) NOT NULL,
-  `Technische_Kontaktdaten` INT NOT NULL,
-  `Administrative_Kontaktdaten` INT NOT NULL,
-  `Kontaktadresse` INT NOT NULL,
-  `Rechnungsadresse` INT NOT NULL,
-  PRIMARY KEY (`KundenNr.`, `Technische_Kontaktdaten`, `Administrative_Kontaktdaten`, `Kontaktadresse`, `Rechnungsadresse`),
-  INDEX `fk_Kunden_Kontaktdaten1_idx` (`Technische_Kontaktdaten` ASC),
-  INDEX `fk_Kunden_Kontaktdaten2_idx` (`Administrative_Kontaktdaten` ASC),
-  INDEX `fk_Kunden_Adressen1_idx` (`Kontaktadresse` ASC),
-  INDEX `fk_Kunden_Adressen2_idx` (`Rechnungsadresse` ASC),
-  CONSTRAINT `fk_Kunden_Kontaktdaten1`
-    FOREIGN KEY (`Technische_Kontaktdaten`)
-    REFERENCES `RoehFix`.`Kontaktdaten` (`idKontaktdaten`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Kunden_Kontaktdaten2`
-    FOREIGN KEY (`Administrative_Kontaktdaten`)
-    REFERENCES `RoehFix`.`Kontaktdaten` (`idKontaktdaten`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Kunden_Adressen1`
-    FOREIGN KEY (`Kontaktadresse`)
-    REFERENCES `RoehFix`.`Adressen` (`idAdressen`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Kunden_Adressen2`
-    FOREIGN KEY (`Rechnungsadresse`)
-    REFERENCES `RoehFix`.`Adressen` (`idAdressen`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+```sql
+show fields from Kunden;
+```
 
+<img width="100%" src='./bilder/myTest.png'></img>
 
--- -----------------------------------------------------
--- Table `RoehFix`.`Gatways`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RoehFix`.`Gatways` (
-  `idGatways` INT NOT NULL,
-  `Kennung` VARCHAR(20) NOT NULL,
-  `LaengeKoordination` FLOAT NOT NULL,
-  `BreiteKoordination` FLOAT NOT NULL,
-  `Beschreibung` LONGTEXT NULL,
-  `Kunden_KundenNr.` VARCHAR(8) NOT NULL,
-  PRIMARY KEY (`idGatways`),
-  INDEX `fk_Gatways_Kunden1_idx` (`Kunden_KundenNr.` ASC),
-  CONSTRAINT `fk_Gatways_Kunden1`
-    FOREIGN KEY (`Kunden_KundenNr.`)
-    REFERENCES `RoehFix`.`Kunden` (`KundenNr.`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `RoehFix`.`Sensoren`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RoehFix`.`Sensoren` (
-  `idSensoren` INT NOT NULL,
-  `Kennung` VARCHAR(20) NOT NULL,
-  `LaengeKoordination` FLOAT NOT NULL COMMENT '\n',
-  `BreiteKoordination` FLOAT NOT NULL,
-  PRIMARY KEY (`idSensoren`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `RoehFix`.`Typ`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RoehFix`.`Typ` (
-  `idTyp` INT NOT NULL,
-  `Heizung` VARCHAR(25) NOT NULL,
-  `Temperatur` FLOAT NOT NULL,
-  `Klima` VARCHAR(30) NULL,
-  `Sensoren_idSensoren` INT NOT NULL,
-  PRIMARY KEY (`idTyp`, `Sensoren_idSensoren`),
-  INDEX `fk_Typ_Sensoren1_idx` (`Sensoren_idSensoren` ASC),
-  CONSTRAINT `fk_Typ_Sensoren1`
-    FOREIGN KEY (`Sensoren_idSensoren`)
-    REFERENCES `RoehFix`.`Sensoren` (`idSensoren`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `RoehFix`.`Sensordaten`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RoehFix`.`Sensordaten` (
-  `idSensordaten` INT NOT NULL,
-  `Daten` FLOAT NOT NULL,
-  `Zeitpunkt` DATETIME(6) NOT NULL,
-  `Sensoren_idSensoren` INT NOT NULL,
-  PRIMARY KEY (`idSensordaten`, `Sensoren_idSensoren`),
-  INDEX `fk_Sensordaten_Sensoren1_idx` (`Sensoren_idSensoren` ASC),
-  CONSTRAINT `fk_Sensordaten_Sensoren1`
-    FOREIGN KEY (`Sensoren_idSensoren`)
-    REFERENCES `RoehFix`.`Sensoren` (`idSensoren`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `RoehFix`.`Gatways_has_Sensoren`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `RoehFix`.`Gatways_has_Sensoren` (
-  `Gatways_idGatways` INT NOT NULL,
-  `Sensoren_idSensoren` INT NOT NULL,
-  PRIMARY KEY (`Gatways_idGatways`, `Sensoren_idSensoren`),
-  INDEX `fk_Gatways_has_Sensoren_Sensoren1_idx` (`Sensoren_idSensoren` ASC),
-  INDEX `fk_Gatways_has_Sensoren_Gatways1_idx` (`Gatways_idGatways` ASC),
-  CONSTRAINT `fk_Gatways_has_Sensoren_Gatways1`
-    FOREIGN KEY (`Gatways_idGatways`)
-    REFERENCES `RoehFix`.`Gatways` (`idGatways`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Gatways_has_Sensoren_Sensoren1`
-    FOREIGN KEY (`Sensoren_idSensoren`)
-    REFERENCES `RoehFix`.`Sensoren` (`idSensoren`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-~~~
-
-
-
-reproduzierbar?
-Beschreiben?
 
 <br>
 <br>
@@ -428,6 +341,15 @@ Beschreiben?
 <br>
 
 #### 3.4.2 Argumentative Entscheidung für indizierte Attribute
+
+__INDEX:__
+- Telefonnummer: Später falls sich mehrere Kunden von der gleichen Firma ein Konto haben und sie eine allgemeine Telefonnummer haben.
+- Email: Allgemeine Email von der Firma wo z.B ein Abteilung, daher können mehrere Kunden von eine Firma die gleiche Email haben, aber eine andere Telefonnummer.
+- Strasse: In einer Strasse können mehrere wohnen.
+- Vorname: Viele Personen haben den gleichen Vornamen.
+- Nachname: Viele Personen haben den gleichen Nachnamen.
+
+__UNIQUE:__
 
 <br>
 <br>
