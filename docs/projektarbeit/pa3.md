@@ -100,29 +100,161 @@ __ERM__
 
 ## 3.3 Script
 
-```mysql
 
--- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+~~~SQL
 
 -- -----------------------------------------------------
--- Schema RoehFix
+-- Datenbank erstellen RoehFix
+-- Datenbank auswählen
 -- -----------------------------------------------------
+CREATE DATABASE IF NOT EXISTS RoehFix DEFAULT CHARACTER SET utf8 ;
+USE RoehFix ;
 
 -- -----------------------------------------------------
--- Schema RoehFix
+-- Tabelle RoehFix.Kontaktdaten erstellen
+-- Attribute (KontaktdatenID, Telefonnummer, Email) hinzufügen
+-- Primärschlüssel definieren (KontaktdatenID)
+-- Indexierung für schnellere Suche (Telefonnummer, Email)
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `RoehFix` DEFAULT CHARACTER SET utf8 ;
+CREATE TABLE IF NOT EXISTS RoehFix.Kontaktdaten (
+  KontaktdatenID INT NOT NULL,
+  Telefonnummer VARCHAR(18) NOT NULL,
+  Email VARCHAR(45) NOT NULL,
+  PRIMARY KEY (KontaktdatenID),
+  INDEX (Telefonnummer ASC),
+  INDEX (Email ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Tabelle RoehFix.Adressen erstellen
+-- Attribute (AdressenID, Strasse, PLZ, Stadt) hinzufügen
+-- Primärschlüssel definieren (AdressenID)
+-- Indexierung für schnellere Suche (Telefonnummer, Email)
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS RoehFix.Adressen (
+  AdressenID INT NOT NULL,
+  Strasse VARCHAR(30) NOT NULL,
+  PLZ SMALLINT(6) NOT NULL,
+  Stadt VARCHAR(20) NOT NULL,
+  PRIMARY KEY (AdressenID),
+  INDEX (Strasse ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table RoehFix.Kunden
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS RoehFix.Kunden (
+  KundenNr VARCHAR(8) NOT NULL,
+  Vorname VARCHAR(25) NOT NULL,
+  Nachname VARCHAR(25) NOT NULL,
+  Technische_Kontaktdaten INT NOT NULL,
+  Administrative_Kontaktdaten INT NOT NULL,
+  Kontaktadresse INT NOT NULL,
+  Rechnungsadresse INT NOT NULL,
+  PRIMARY KEY (KundenNr),
+  FOREIGN KEY (Technische_Kontaktdaten REFERENCES RoehFix.Kontaktdaten(KontaktdatenID),
+  FOREIGN KEY (Administrative_Kontaktdaten) REFERENCES RoehFix.Kontaktdaten(KontaktdatenID),
+  FOREIGN KEY (Kontaktadresse) REFERENCES RoehFix.Adressen(AdressenID),
+  FOREIGN KEY (Rechnungsadresse) REFERENCES RoehFix.Adressen(AdressenID),
+  INDEX (Vorname ASC),
+  INDEX (Nachname ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table RoehFix.Gatways
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS RoehFix.Gatways (
+  GatwaysID INT NOT NULL,
+  Kennung VARCHAR(20) NOT NULL,
+  LaengeKoordinaten FLOAT NOT NULL,
+  BreiteKoordinaten FLOAT NOT NULL,
+  Beschreibung LONGTEXT NULL,
+  KundenNr VARCHAR(8) NOT NULL,
+  PRIMARY KEY (GatwaysID),
+  FOREIGN KEY (KundenNr) REFERENCES RoehFix.Kunden(KundenNr),
+  INDEX (Kennung))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table RoehFix.Sensoren
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS RoehFix.Sensoren (
+  SensorenID INT NOT NULL,
+  Kennung VARCHAR(20) NOT NULL,
+  LaengeKoordination FLOAT NOT NULL,
+  BreiteKoordination FLOAT NOT NULL,
+  PRIMARY KEY (SensorenID))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table RoehFix.Typ
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS RoehFix.Typ (
+  TypID INT NOT NULL,
+  Heizung VARCHAR(25) NOT NULL,
+  Temperatur FLOAT NOT NULL,
+  Klima VARCHAR(30) NULL,
+  SensorenID INT,
+  PRIMARY KEY (TypID),
+  FOREIGN KEY (SensorenID) REFERENCES RoehFix.Sensoren(SensorenID),
+  INDEX (Heizung ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table RoehFix.Sensordaten
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS RoehFix.Sensordaten (
+  SensordatenID INT NOT NULL,
+  Daten FLOAT NOT NULL,
+  Zeitpunkt DATETIME(6) NOT NULL,
+  SensorenID INT NOT NULL,
+  PRIMARY KEY (SensordatenID),
+  FOREIGN KEY (SensorenID) REFERENCES RoehFix.Sensoren(SensorenID),
+  INDEX (Zeitpunkt ASC),
+  INDEX (Daten ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table RoehFix.Gatways_has_Sensoren
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS RoehFix.Gatways_has_Sensoren (
+  Gatways_GatwaysID INT NOT NULL,
+  Sensoren_SensorenID INT NOT NULL,
+  PRIMARY KEY (Gatways_GatwaysID, Sensoren_SensorenID),
+  FOREIGN KEY (Gatways_GatwaysID) REFERENCES RoehFix.Gatways(GatwaysID),
+  FOREIGN KEY (Sensoren_SensorenID) REFERENCES RoehFix.Sensoren(SensorenID),
+  INDEX (Sensoren_SensorenID ASC),
+  INDEX (Gatways_GatwaysID ASC)
+  )
+ENGINE = InnoDB;
+
+
+
+~~~
+
+
+~~~SQL
+
+-- -----------------------------------------------------
+-- Datenbank erstellen RoehFix
+-- Datenbank auswählen
+-- -----------------------------------------------------
+CREATE DATABASE IF NOT EXISTS `RoehFix` DEFAULT CHARACTER SET utf8 ;
 USE `RoehFix` ;
 
 -- -----------------------------------------------------
 -- Table `RoehFix`.`Kontaktdaten`
+
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `RoehFix`.`Kontaktdaten` (
-  `idKontaktdaten` INT NOT NULL,
+  idKontaktdaten INT NOT NULL,
   `Telefonnummer` VARCHAR(18) NOT NULL,
   `Email` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idKontaktdaten`),
@@ -276,8 +408,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-```
-
+~~~
 
 
 
