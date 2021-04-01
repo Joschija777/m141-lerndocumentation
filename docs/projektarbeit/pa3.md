@@ -337,10 +337,83 @@ show fields from Kunden;
 
 #### 3.4.1 Argumentative Entscheidung für Indexierungstypen
 
+Indextypen | Beschreibung | Link 
+:-------- | :----------  | :----------
+Primary Key |   Je Tabelle ist nur ein Primary Key möglich, dies ist typischerweise die ID-Spalte. Jeder Eintrag in dieser Spalte muss eindeutig sein, eine Doppelung ist ausgeschlossen. Der Primary Key unterscheidet sich nicht von Unique, nur dass es maximal einen Primary Key pro Tabelle geben darf. |  https://www.w3schools.com/sql/sql_primarykey.asp
+Foreign Key   |   Der Foreign Key braucht es für die Verbindung zwischen den Tabellen er wird auch Indexiert. | https://www.w3schools.com/sql/sql_foreignkey.asp
+Unique   |   Spalten mit einem Index des Typs Unique können nur eindeutige Werte enthalten. Dass zwei Datensätze den selben Wert in der Spalte enthalten ist ausgeschlossen. | https://www.w3schools.com/sql/sql_unique.asp
+Index |   Spalten die mittels Index gekennzeichnet werden können im Gegensatz zu Unique und Primary Key auch doppelte Werte in der Spalte enthalten. |  https://www.w3schools.com/sql/sql_create_index.asp
+Fulltext |    Der Typ Fulltext ist geeignet für Spalten die längere Texte enthalten. Jedes Wort wird dabei indiziert und eine Suche nach einzelnen Wörtern oder Teilwörtern ist möglich. Diesen Typ zu wählen macht nur Sinn, wenn mit der Volltextsuche von MySQL gearbeitet wird. | https://www.w3schools.com/sql/sql_create_index.asp 
+
+
 <br>
 <br>
 
 #### 3.4.2 Argumentative Entscheidung für indizierte Attribute
+
+Fragen: 
+
+- Braucht es 2 Indexierungen(Telefon & EMail) in den Kundendaten?
+> [!ATTENTION|style:flat]
+> __NEIN!!!__
+>
+> Es bräuchte hier keine 2 Indexierungen, da eine z.B EMail langen würde. Aber ich habe es so gemacht da ich beide Attribute wichtig finde und schnell finden möchte. 
+
+<br>
+
+- Macht der Index Strasse Sinn bei der Tabelle Adressen? 
+> [!WARNING|style:flat]
+> __Villeicht!!!__
+>
+> Ich finde schon das die Strasse Sinn ergibt da man die schnell Suchen möchte, hier ist die Überlegung sicher Sinvoll ob man nur den Primary Key Adressen als Index haben möchte.
+
+<br>
+
+- Finden Sie es Wichtig das bei Kundendaten Vor und Nachname eine Indexierung Haben? 
+> [!TIP|style:flat]
+> __JA!!!__
+>
+> Die Indexierung finde ich sehr wichtig, da man die Personen meistens mit dem Namen sucht.
+
+<br>
+
+- Ist es Sinvoll bei den Tabellen Gateways & Sensoren einen Unique Index bei Kennung zu vergeben? 
+> [!TIP|style:flat]
+> __JA!!!__
+>
+> Die Kennung ist ein eindeutige Wert.
+
+<br>
+
+- Sollte bei der Tabelle Typ nicht die Temperatur Indexiert werden.
+> [!ATTENTION|style:flat]
+> __NEIN!!!__
+>
+> Bei meinen aufforderungen macht es kein Sinn um die Temperatur herauszufiltern.
+
+<br>
+
+- Sollte bei der Tabelle Typ nicht die Zeit Indexiert werden.
+> [!WARNING|style:flat]
+> __Villeicht!!!__
+>
+> Ja das wäre eine Überlegung Wert, falls ma die Zeit herausfinden möchte.
+
+
+
+<br>
+<br>
+
+#### 3.4.3 Umsetzung in Script separat erklärt
+
+__PRIMARY KEY:__
+- sensordatenID: INT Aufzählung der Sonsordaten.
+- typID: INT Aufzählung der Typen.
+- sensorenID: INT Aufzählung der Sensoren.
+- gatwaysID: INT Aufzählung der Gatways.
+- kundenNr: VARCHAR Buchstabe und Zahlen für die Aufzählung der Kunden.
+- adressenID: INT Aufzählung der Adressen.
+- kontaktdatenID: INT Aufzählung der Konaktdaten.
 
 __INDEX:__
 - Telefonnummer: Später falls sich mehrere Kunden von der gleichen Firma ein Konto haben und sie eine allgemeine Telefonnummer haben.
@@ -350,9 +423,9 @@ __INDEX:__
 - Nachname: Viele Personen haben den gleichen Nachnamen.
 
 __UNIQUE:__
+- Kennung: Die Kennung ist einzigartig bei Gatways und Sensoren. Da ich Später viel bei der Kennung suchen möchte werde ich diese al UNIQUE vegeben.
+- Heizung: Die Heizung idt auch einzigartig und sobald ich bei den Typen Suche möchte isch einen schnellen Zugriff bei der Heizung.
 
-<br>
-<br>
 
-#### 3.4.3 Umsetzung in Script separat erklärt
-
+__Full Text:__
+- Beschreibung: Mann könnte bei der Beschreibung einen Full Text Index geben, finde ich aber in meinen Beispiel bei Gatways nicht notwendig.
