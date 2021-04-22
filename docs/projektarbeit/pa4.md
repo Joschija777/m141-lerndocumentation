@@ -159,7 +159,7 @@ gatwaysID,kennung,laengeKoordinaten,breiteKoordinaten,beschreibung,kundenNr
 #### 4.2.2 Befehl um Daten aus CSV einzulesen dokumentiert
 
 ```sql
-LOAD DATA INFILE '/tmp/sql/gateways.csv'
+LOAD DATA INFILE '/var/lib/mysql/gateways.csv'
 INTO TABLE gatways
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -173,6 +173,44 @@ IGNORE 1 ROWS;
 
 #### 4.2.3 Printscreen für die erfolgreiche Ausführung
 
+1. Als Root anmelden.
+
+```Terminal
+sudo su
+```
+
+2. CSV Datei speichern
+```Terminal
+sudo nano /var/lib/mysql/gateways.csv
+```
+
+3. Mysql anmelden
+```Terminal
+mysql -u root -p
+```
+
+4. Datenbank verwenden
+```sql
+use roehFix;
+```
+
+5. Skript laden
+```sql
+LOAD DATA INFILE '/var/lib/mysql/gateways.csv'
+INTO TABLE gatways
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+```
+<img width="100%" src='./bilder/csvSkript.png'></img>
+
+6. Schauen ob die Daten auch eingetragen wurden
+```sql
+select * from gatways;
+```
+<img width="100%" src='./bilder/csvTest.png'></img>
+
 <br>
 <br>
 <br>
@@ -185,10 +223,42 @@ IGNORE 1 ROWS;
 
 #### 4.3.1 Befehl um mehrere Tabellen in SQL-Dateien exportieren
 
+Allgemein mysqldump:
+
+```Terminal
+# Allgemein
+mysqldump [options] db_name [tbl_name ...] > dump.sql
+
+# Datenbanken angeben
+mysqldump [options] --databases db_name ... > dump.sql
+
+# ...oder einfach alle zusammen
+mysqldump [options] --all-databases > dump.sql
+```
+
+> [!NOTE|style:flat]
+> Beispiel
+> ```Terminal
+> mysqldump roehFix adressen kundendaten kunden gatways > /tmp/roehFix.sql
+> ```
+
+
 <br>
 <br>
 
 #### 4.3.2 Printscreen für die erfolgreiche Ausführung
+
+1. mysqldump Befehl ausführen
+```Terminal
+mysqldump roehFix adressen kundendaten kunden gatways > /tmp/roehFix.sql
+```
+<img width="100%" src='./bilder/sqlExport.png'></img>
+
+2. SQL Skript öffnen
+```Terminal
+sudo nano /tmp/roehFix.sql
+```
+<img width="100%" src='./bilder/sqlExport2.png'></img>
 
 <br>
 <br>
