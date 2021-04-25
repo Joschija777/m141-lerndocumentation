@@ -54,10 +54,6 @@ VALUES
 > Daher lieber bei Testdaten fixe ID geben!!!
 
 
-__Löschen:__
-
-
-__Datenbank auswählen:__
 
 <br>
 <br>
