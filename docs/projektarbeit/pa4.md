@@ -272,6 +272,97 @@ sudo nano /tmp/roehFix.sql
 
 
 #### 4.4.1 PHP-Script mit Inline-Kommentaren zu Überlegungen
+```php
+
+$servername = "localhost";
+$username = "root";
+$password = "Admin_123";
+$dbname = "roehFix";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+function generateRandomKennung($length = 6) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+
+function generateLaengeKordination($start_number = 0,$end_number = 1,$mul = 1000000) {
+ 	if ($start_number > $end_number) return false;
+ 	return mt_rand($start_number * $mul,$end_number * $mul)/$mul;
+}
+
+function generateBreiteKordination($start_number = 0,$end_number = 1,$mul = 1000000) {
+ 	if ($start_number > $end_number) return false;
+ 	return mt_rand($start_number * $mul,$end_number * $mul)/$mul;
+}
+
+for($i=0; $i < 10; $i++) {
+  $kennung = generateRandomKennung();
+  $laengeKordination = generateLaengeKordination(1000,19203);
+  $breiteKordination = generateBreiteKordination(1000,19203);
+  $sql = "INSERT INTO sensoren (sensorenID, kennung, laengeKoordination, breiteKoordination)
+  VALUES ('NULL', :kennung, :laengeKordination, :breiteKordination)";
+}
+
+
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
+```
+
+
+<br>
+
+```php
+function generateRandomNumber($min=0, $max=1) {
+  return rand($min,$max);
+}
+
+function generateRandomFloat($start_number = 0,$end_number = 1,$mul = 1000000) {
+ 	// If start number is greater than end number then return false
+ 	if ($start_number > $end_number) return false;
+	// Return random float number
+ 	return mt_rand($start_number * $mul,$end_number * $mul)/$mul;
+}
+
+
+
+function generateRandomString($length = 6) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+// Generate and show random float number
+// Generate random float between default value (from 0 to 1)
+for($i=0; $i < 10; $i++) {
+   echo generateRandomNumber(0,19203)."<br>";
+   echo generateRandomFloat(1000,19203)."<br>";
+   echo generateRandomString()."<br>";
+}
+
+```
+
 
 <br>
 <br>
@@ -284,3 +375,13 @@ sudo nano /tmp/roehFix.sql
 #### 4.4.3 Printscreen für die erfolgreiche Ausführung
 <br>
 <br>
+
+1. PHP Installieren
+```Terminal
+sudo apt install php7.4-cli
+```
+
+2. MYSQLI in PHP installieren
+```Terminal
+sudo apt-get install -y php-mysqli
+```
