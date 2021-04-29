@@ -471,3 +471,23 @@ use roehFix;
 select * from sensoren;
 ```
 <img width="70%" src='./bilder/phpSkriptTest.png'></img>
+
+## 4.5 Sonstiges
+
+#### 4.5.1 Datensätze löschen
+
+1. Sobalds eine FOREIGN_Key verbindung hat muss man das zuerst deaktivieren
+```mysql
+SET FOREIGN_KEY_CHECKS=0;
+```
+
+2. Tabellen löschen
+```mysql
+delete from table_name;
+```
+
+3. FOREIGN Key überprüfung aktivieren
+```mysql
+SET FOREIGN_KEY_CHECKS=1;
+```
+<img width="100%" src='./bilder/sqlLoeschen.png'></img>
