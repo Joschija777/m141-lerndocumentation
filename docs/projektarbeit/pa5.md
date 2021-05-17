@@ -120,13 +120,106 @@ php -v
 ## 5.2 Einrichten Applikationsbenutzer für die Visualisierungszugriffe
         
 #### 5.2.1 Benutzer erstellen
-        
+
+Ich habe für die Datenbank 4 User mit verschiedenen Rechte erstellt. Sie haben jeweils verschieden tiefe Berechtigungen und sind nur für ihr Gebiet berechtigt.
+- DBrFAbfrage
+- DBrFUpdate
+- DBrFDatenAdmin
+- DBrFAdmin
+
+<br>
+
+__DBrFAbfrage:__
+ 
+Dieser Benutzer ist dafür da um Abfragen auf der DB zu machen. Er hat keine Berechtigung, um irgendwelche Daten oder gar die Struktur zu ändern. Er hat nur die Berechtigung um SELECT-Befehle auszuführen. 
+
+```MYSQL
+# Benutzer: DBrFAbfrage
+# auf Localhost
+CREATE USER 'DBrFAbfrage'@'localhost' IDENTIFIED BY 'abfrage';
+
+# auf AppliServer
+CREATE USER 'DBrFAbfrage'@'AppliServer' IDENTIFIED BY 'abfrage';
+```
+
+<br>
+
+
+__DBrFUpdate:__
+
+Die Benutzer ist dafür da um die Kundendaten, Sensoren und Gatways Daten auf dem aktuellen Stand zuhalten. Mann kann alles mit den angegeben Tabellen machen ausser die Strucktur ändern. 
+
+```MYSQL
+# Benutzer: DBrFUpdate
+# auf Localhost
+CREATE USER 'DBrFUpdate'@'localhost' IDENTIFIED BY 'aktualisierung';
+
+# auf AppliServer
+CREATE USER 'DBrFUpdate'@'AppliServer' IDENTIFIED BY 'aktualisierung';
+```
+
+
+<br>
+
+
+__DBrFDatenAdmin:__
+
+Dieser Benutzer hat das Recht alle Tabellen die Daten zu manipulieren, einzufügen und zu Lesen.
+
+```MYSQL
+# Benutzer: DBrFDatenadmin
+# auf Localhost
+CREATE USER 'DBrFDatenadmin'@'localhost' IDENTIFIED BY 'daten';
+```
+
+<br>
+
+__DBrFAdmin:__
+
+Dieser Benutzer hat die gleichen Rechte wie der User Root. Er ist somit ein Super-User und hat alle Rechte auf die Datenbank.
+
+```MYSQL
+# Benutzer: DBrFAdmin
+# auf Localhost
+CREATE USER 'DBrFAdmin'@'localhost' IDENTIFIED BY 'admin';
+```
+
+
+<br>
+<br>
+
        
 #### 5.2.2 Berechtigungen erstellt
 
 
-__DBrFAbfrage:__
+Rechte | MYSQL Berrechtigungen | 
+:-------- | :---------- 
+Strucktur ändern  |   CREATE, DROP 
+Daten manibulieren |  DELETE, UPDATE 
+Daten einfügen | INSERT  
+Lesen |  SELECT
 
+> [!NOTE|style:flat]
+> __ALL PRIVILEGES:__ Ein Wildcard für alle Rechte auf das gewählte Datenbankobjekt, mit einem *.* auf alle Datenbanken.
+>
+> __CREATE:__ Erlaubt einem Benutzer, neue Datenbanken zu erstellen
+>
+> __DROP:__ Erlaubt einem Benutzer, Datenbanken zu löschen
+>
+> __DELETE:__ Erlaubt einem Benutzer, einzelne Zeilen in einer Tabelle zu löschen
+>
+> __INSERT:__ Erlaubt einem Benutzer, neue Zeilen in eine Tabelle zu schreiben
+>
+> __SELECT:__ Leseberechtigungen auf eine Datenbank oder Tabelle
+>
+> __UPDATE:__ Erlaubnis, eine Zeile zu aktualisieren
+
+
+<br>
+
+
+__DBrFAbfrage:__
+ 
 Tabelle | Strucktur ändern | Daten manibulieren | Daten einfügen | Lesen 
 :-------- | :---------- | :---------- | :---------- | :---------- 
 Kunden |   |   |   | x |
@@ -138,6 +231,14 @@ Sensoren  |   |   |   | x |
 Sendordaten  |   |   |   | x |
 Typ |   |   |   | x |
 
+```MYSQL
+# Benutzer: DBrFAbfrage
+# auf Localhost
+GRANT SELECT ON roehFix.* TO 'DBrFAbfrage'@'localhost';
+
+# auf AppliServer
+GRANT SELECT ON roehFix.* TO 'DBrFAbfrage'@'AppliServer';
+```
 
 <br>
 
@@ -155,9 +256,25 @@ Sendordaten  |   |   |   |   |
 Typ |   |   |   |   |
 
 
+```MYSQL
+# Benutzer: DBrFUpdate
+# auf Localhost
+# auf Tabelle Kontaktdaten
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.kontaktdaten TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Adressen
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.adressen TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Kunden
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.kunden TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Gatways
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.gatways TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Sensoren
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.sensoren TO 'DBrFUpdate'@'localhost';
+```
+
 <br>
 
 __DBrFDatenAdmin:__
+
 
 Tabelle | Strucktur ändern | Daten manibulieren | Daten einfügen | Lesen 
 :-------- | :---------- | :---------- | :---------- | :---------- 
@@ -170,9 +287,16 @@ Sensoren  |   | x | x | x |
 Sendordaten  |   | x | x | x |
 Typ |   | x | x | x |
 
+
+```MYSQL
+# Benutzer: DBrFDatenadmin
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.* TO 'DBrFDatenadmin'@'localhost';
+```
+
 <br>
 
 __DBrFAdmin:__
+
 
 Tabelle | Strucktur ändern | Daten manibulieren | Daten einfügen | Lesen 
 :-------- | :---------- | :---------- | :---------- | :---------- 
@@ -186,10 +310,48 @@ Sendordaten  | x | x | x | x |
 Typ | x | x | x | x |
 
 
+```MYSQL
+# Benutzer: DBrFAdmin
+# auf Localhost
+GRANT ALL PRIVILEGES ON roehFix.* TO 'DBrFAdmin'@'localhost';
+```
+
 <br>
 <br>
 
-### 5.2.3 Zugriff getestet
+#### 5.2.3 Zugriff getestet
+
+__Test 1: DBrFAbfrage__
+
+1. Mit User in Datenbank anmelden
+```
+mysql -u user -p roeFix
+```
+
+<br>
+
+__Test 2: DBrFUpdate__
+
+1. Mit User in Datenbank anmelden
+```
+mysql -u user -p roeFix
+```
+
+<br>
+
+
+__Test 3: DBrFAdmin__
+
+1. Mit User in Datenbank anmelden
+```
+mysql -u user -p roeFix
+```
+
+
+<br>
+<br>
+
+#### 5.2.4 Script
 
 ```roehfixBerechtigungen
 # ------------------------------------------------------------------------------
@@ -199,6 +361,7 @@ Typ | x | x | x | x |
 # Datum:        17.05.2021
 # Kommando:     mysql -u root -p < roehfixberechtigungen.sql
 # ------------------------------------------------------------------------------
+
 #Alte Benuter löschen
 USE mysql;
 DROP USER 'DBrFAbfrage'@'localhost';
@@ -208,62 +371,58 @@ DROP USER 'DBrFUpdate'@'AppliServer';
 DROP USER 'DBrFDatenadmin'@'localhost';
 DROP USER 'DBrFAdmin'@'localhost';
 
+
 # Benutzer: DBrFAbfrage
 # auf Localhost
 CREATE USER 'DBrFAbfrage'@'localhost' IDENTIFIED BY 'abfrage';
-GRANT SELECT ON DBschweizerPolitiker.* TO 'DBrFAbfrage'@'localhost';
+GRANT SELECT ON roehFix.* TO 'DBrFAbfrage'@'localhost';
+
 # auf AppliServer
 CREATE USER 'DBrFAbfrage'@'AppliServer' IDENTIFIED BY 'abfrage';
-GRANT SELECT ON DBschweizerPolitiker.* TO 'DBrFAbfrage'@'AppliServer';
+GRANT SELECT ON roehFix.* TO 'DBrFAbfrage'@'AppliServer';
+
+
 
 # Benutzer: DBrFUpdate
 # auf Localhost
 CREATE USER 'DBrFUpdate'@'localhost' IDENTIFIED BY 'aktualisierung';
-# auf Tabelle tblVorstoesse
-GRANT SELECT ON DBschweizerPolitiker.tblVorstoesse TO 'DBrFUpdate'@'localhost';
-GRANT INSERT ON DBschweizerPolitiker.tblVorstoesse TO 'DBrFUpdate'@'localhost';
-GRANT DELETE ON DBschweizerPolitiker.tblVorstoesse TO 'DBrFUpdate'@'localhost';
-GRANT UPDATE ON DBschweizerPolitiker.tblVorstoesse TO 'DBrFUpdate'@'localhost';
-# auf Tabelle tblPolitiker
-GRANT SELECT ON DBschweizerPolitiker.tblPolitiker TO 'DBrFUpdate'@'localhost';
-GRANT INSERT ON DBschweizerPolitiker.tblPolitiker TO 'DBrFUpdate'@'localhost';
-GRANT DELETE ON DBschweizerPolitiker.tblPolitiker TO 'DBrFUpdate'@'localhost';
-GRANT UPDATE ON DBschweizerPolitiker.tblPolitiker TO 'DBrFUpdate'@'localhost';
-# auf Tabelle tblInteressenbindungen
-GRANT SELECT ON DBschweizerPolitiker.tblInteressenbindungen TO 'DBrFUpdate'@'localhost';
-GRANT INSERT ON DBschweizerPolitiker.tblInteressenbindungen TO 'DBrFUpdate'@'localhost';
-GRANT DELETE ON DBschweizerPolitiker.tblInteressenbindungen TO 'DBrFUpdate'@'localhost';
-GRANT UPDATE ON DBschweizerPolitiker.tblInteressenbindungen TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Kontaktdaten
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.kontaktdaten TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Adressen
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.adressen TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Kunden
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.kunden TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Gatways
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.gatways TO 'DBrFUpdate'@'localhost';
+# auf Tabelle Sensoren
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.sensoren TO 'DBrFUpdate'@'localhost';
+
 # auf AppliServer
 CREATE USER 'DBrFUpdate'@'AppliServer' IDENTIFIED BY 'aktualisierung';
-# auf Tabelle tblVorstoesse
-GRANT SELECT ON DBschweizerPolitiker.tblVorstoesse TO 'DBrFUpdate'@'AppliServer';
-GRANT INSERT ON DBschweizerPolitiker.tblVorstoesse TO 'DBrFUpdate'@'AppliServer';
-GRANT DELETE ON DBschweizerPolitiker.tblVorstoesse TO 'DBrFUpdate'@'AppliServer';
-GRANT UPDATE ON DBschweizerPolitiker.tblVorstoesse TO 'DBrFUpdate'@'AppliServer';
-# auf Tabelle tblPolitiker
-GRANT SELECT ON DBschweizerPolitiker.tblPolitiker TO 'DBrFUpdate'@'AppliServer';
-GRANT INSERT ON DBschweizerPolitiker.tblPolitiker TO 'DBrFUpdate'@'AppliServer';
-GRANT DELETE ON DBschweizerPolitiker.tblPolitiker TO 'DBrFUpdate'@'AppliServer';
-GRANT UPDATE ON DBschweizerPolitiker.tblPolitiker TO 'DBrFUpdate'@'AppliServer';
-# auf Tabelle tblInteressenbindungen
-GRANT SELECT ON DBschweizerPolitiker.tblInteressenbindungen TO 'DBrFUpdate'@'AppliServer';
-GRANT INSERT ON DBschweizerPolitiker.tblInteressenbindungen TO 'DBrFUpdate'@'AppliServer';
-GRANT DELETE ON DBschweizerPolitiker.tblInteressenbindungen TO 'DBrFUpdate'@'AppliServer';
-GRANT UPDATE ON DBschweizerPolitiker.tblInteressenbindungen TO 'DBrFUpdate'@'AppliServer';
+# auf Tabelle Kontaktdaten
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.kontaktdaten TO 'DBrFUpdate'@'AppliServer';
+# auf Tabelle Adressen
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.adressen TO 'DBrFUpdate'@'AppliServer';
+# auf Tabelle Kunden
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.kunden TO 'DBrFUpdate'@'AppliServer';
+# auf Tabelle Gatways
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.gatways TO 'DBrFUpdate'@'AppliServer';
+# auf Tabelle Sensoren
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.sensoren TO 'DBrFUpdate'@'AppliServer';
+
+
 
 # Benutzer: DBrFDatenadmin
 # auf Localhost
 CREATE USER 'DBrFDatenadmin'@'localhost' IDENTIFIED BY 'daten';
-GRANT SELECT ON DBschweizerPolitiker.* TO 'DBrFDatenadmin'@'localhost';
-GRANT INSERT ON DBschweizerPolitiker.* TO 'DBrFDatenadmin'@'localhost';
-GRANT DELETE ON DBschweizerPolitiker.* TO 'DBrFDatenadmin'@'localhost';
-GRANT UPDATE ON DBschweizerPolitiker.* TO 'DBrFDatenadmin'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.* TO 'DBrFDatenadmin'@'localhost';
+
+
 
 # Benutzer: DBrFAdmin
 # auf Localhost
 CREATE USER 'DBrFAdmin'@'localhost' IDENTIFIED BY 'admin';
-GRANT ALL PRIVILEGES ON DBschweizerPolitiker.* TO 'DBrFAdmin'@'localhost';
+GRANT ALL PRIVILEGES ON roehFix.* TO 'DBrFAdmin'@'localhost';
 
 FLUSH PRIVILEGES;
 ```
@@ -276,6 +435,61 @@ FLUSH PRIVILEGES;
 
 
 ## 5.3 Umsetzung PHP-Script mit Plotting der Daten
+
+__Script:__
+
+```HTML
+
+<?php
+
+    $conn = mysqli_connect('localhost','root','Admin_123','roehFix');
+    $sql = "SELECT kennung, laengeKoordination, breiteKoordination FROM sensoren ;
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_assoc($result))
+    {
+	   $dataPoints[] = array("j"=>$row['kennung'],"x"=>$row['laengeKoordination'], "y"=>$row['breiteKoordination']);
+    }
+?>
+
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	zoomEnabled: true,
+	title:{
+		text: "RoeFix Sensordaten"
+	},
+	axisX: {
+		title:"Laenge Koordination",
+	},
+	axisY:{
+		title: "Breite Koordination",
+	},
+	data: [{
+		type: "scatter",
+		toolTipContent: "<b>Kennung: </b>{j} sq.ft<br/><b>Laenge Kordination: </b>{x} sq.ft<br/><b>Breite Kordination: </b>{y}",
+    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
+```
+
+<br>
+
+__Anleitung:__
 
 1. Verzeichnis erstellen
 ```Terminal
@@ -300,8 +514,54 @@ sudo chmod -R 755 /var/www/roehfix
 ```Terminal
 sudo nano /var/www/roehfix/index.php
 ```
-```index.php
-Skript.php
+
+```HTML
+
+<?php
+
+    $conn = mysqli_connect('localhost','root','Admin_123','roehFix');
+    $sql = "SELECT kennung, laengeKoordination, breiteKoordination FROM sensoren ;
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_assoc($result))
+    {
+	   $dataPoints[] = array("j"=>$row['kennung'],"x"=>$row['laengeKoordination'], "y"=>$row['breiteKoordination']);
+    }
+?>
+
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	zoomEnabled: true,
+	title:{
+		text: "RoeFix Sensordaten"
+	},
+	axisX: {
+		title:"Laenge Koordination",
+	},
+	axisY:{
+		title: "Breite Koordination",
+	},
+	data: [{
+		type: "scatter",
+		toolTipContent: "<b>Kennung: </b>{j} sq.ft<br/><b>Laenge Kordination: </b>{x} sq.ft<br/><b>Breite Kordination: </b>{y}",
+    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
 ```
 
 
@@ -360,20 +620,29 @@ http://your_server_ip
 
 __Wie haben Sie die Arbeiten an dieser Projekt erlebt?__
 
+Ich habe bei diesem Projekt sehr viel dazugelernt. Besonders gut gefallen ist die Mischung der repetition von dem altem zu etwas neuem Lernen. Das bringt mich am meisten an dem Lerneffekt. Zusätlich das man von Anfang ein eigenes Projekt aufbaut, sah man wie gut das man mitgemacht hat.
+
 <br>
 
 
 
 __Was hat bei der gesamten Projektarbeit gut funktioniert?__
 
+Es hat nach meiner Meinung sehr viel gut Funktioniert in diesem Projekt. In Grossen bin ich sehr Stolz auf meine Arbeit, da ich praktisch ohne Probleme durchgekommen bin. 
+Zwar hatte ich Teils Probleme bei den Script, aber ich wurde immer schneller und habe es auch verstanden was drin Stand.
+
 <br>
 
 
 __Was hat bei der gesamten Projektarbeit nicht gut funktioniert?__
 
+Der Abschnitt 5 hat mir am meisten Probleme bereiten mit dem Scripts. Aber im Grossen und ganuen ist eigentlich alles gut geangen. Ich glaube ich habe immer noch am meistten Schwirigkeiten an den JOINS. Villeicht könnte ich den Punkt mit der erstellung des ERD und ERM auch zunehmen da ich mehrere Anläfe gebraucht habe, bis ich zufieden war. 
+
 <br>
 
 
 __Wo sehen Sie Verbesserungspotential bei dieser Projektarbeit? Inhaltlich, organsisatorisch?__
+
+Ich kann praktisch nur positives da lassen. Mein Grösster Kritscher Punkt wäre die Letzte Aufgabenstellung. Die war für mich nicht Verständlich. Und das der Test verschoben wurde, mussten wir noch andere Aufgaben machen die haben mich noch zusätlich verwirrt. Aber dies war sicherlich keine Abbsicht. Organisatorich hat für mich alles super gepasst, vorallem mit den 5 verschieden Abganen.  
 
 <br>
