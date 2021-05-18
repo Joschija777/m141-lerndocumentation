@@ -35,10 +35,21 @@ Available applications:
 ```
 
 
-4. Port 80 für Datenverkehr zulassen
+4. Port 80 für Datenverkehr zulassen & SSH
+```Terminal
+sudo ufw enable
+sudo iptables -L
+```
+Apache
 ```Terminal
 sudo ufw allow 'Apache'
 ```
+Openssh
+```Terminal
+sudo ufw allow 'OpenSSH'
+```
+
+
 
 
 5. Überprüfen
@@ -53,6 +64,7 @@ Apache                     ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)             
 Apache (v6)                ALLOW       Anywhere (v6)
 ```
+<img width="80%" src='./bilder/ufwStatus.png'></img>
 
 <br>
 
@@ -62,6 +74,8 @@ __Webserver Testen:__
 ```Terminal
 sudo systemctl status apache2
 ```
+<img width="80%" src='./bilder/apacheStatus.png'></img>
+
 > [!TIP|style:flat]
 >
 >__Webserver stoppen__
@@ -85,11 +99,13 @@ sudo systemctl status apache2
 ```Terminal
 hostname -I
 ```
+<img width="80%" src='./bilder/hostname.png'></img>
 
 8. Firefox öffnen
 ```Firefox
 http://your_server_ip
 ```
+<img width="100%" src='./bilder/apache2.png'></img>
 
 
 
@@ -111,6 +127,7 @@ sudo apt-get install php libapache2-mod-php
 ```Terminal
 php -v
 ```
+<img width="80%" src='./bilder/phpV.png'></img>
 
 <br>
 <br>
@@ -325,7 +342,7 @@ __Test 1: DBrFAbfrage__
 
 1. Mit User in Datenbank anmelden
 ```
-mysql -u user -p roeFix
+mysql -u DBrFAbfrage -p roeFix
 ```
 
 <br>
@@ -334,7 +351,7 @@ __Test 2: DBrFUpdate__
 
 1. Mit User in Datenbank anmelden
 ```
-mysql -u user -p roeFix
+mysql -u DBrFUpdate -p roeFix
 ```
 
 <br>
@@ -344,15 +361,31 @@ __Test 3: DBrFAdmin__
 
 1. Mit User in Datenbank anmelden
 ```
-mysql -u user -p roeFix
+mysql -u DBrFAdmin -p roeFix
 ```
 
 
 <br>
 <br>
 
-#### 5.2.4 Script
+#### 5.2.4 Script ausführen
 
+1. SQl File für Script erstellen
+```Terminal
+sudo nano /var/lib/mysql/roehfixberechtigungen.sql
+```
+
+2. Als Root anmelden
+```Terminal
+sudo su
+```
+
+3. Script ausführen
+```Terminal
+mysql -u root -p < /var/lib/mysql/roehfixberechtigungen.sql
+```
+
+__SCRIPT__
 ```roehfixBerechtigungen
 # ------------------------------------------------------------------------------
 # Scriptname:   roehfixberechtigungen.sql
@@ -364,28 +397,28 @@ mysql -u user -p roeFix
 
 #Alte Benuter löschen
 USE mysql;
-DROP USER 'DBrFAbfrage'@'localhost';
-DROP USER 'DBrFAbfrage'@'AppliServer';
-DROP USER 'DBrFUpdate'@'localhost';
-DROP USER 'DBrFUpdate'@'AppliServer';
-DROP USER 'DBrFDatenadmin'@'localhost';
-DROP USER 'DBrFAdmin'@'localhost';
+DROP USER IF EXISTS 'DBrFAbfrage'@'localhost';
+DROP USER IF EXISTS 'DBrFAbfrage'@'AppliServer';
+DROP USER IF EXISTS 'DBrFUpdate'@'localhost';
+DROP USER IF EXISTS 'DBrFUpdate'@'AppliServer';
+DROP USER IF EXISTS 'DBrFDatenadmin'@'localhost';
+DROP USER IF EXISTS 'DBrFAdmin'@'localhost';
 
 
 # Benutzer: DBrFAbfrage
 # auf Localhost
-CREATE USER 'DBrFAbfrage'@'localhost' IDENTIFIED BY 'abfrage';
+CREATE USER 'DBrFAbfrage'@'localhost' IDENTIFIED BY 'Abfrage_123';
 GRANT SELECT ON roehFix.* TO 'DBrFAbfrage'@'localhost';
 
 # auf AppliServer
-CREATE USER 'DBrFAbfrage'@'AppliServer' IDENTIFIED BY 'abfrage';
+CREATE USER 'DBrFAbfrage'@'AppliServer' IDENTIFIED BY 'Abfrage_123';
 GRANT SELECT ON roehFix.* TO 'DBrFAbfrage'@'AppliServer';
 
 
 
 # Benutzer: DBrFUpdate
 # auf Localhost
-CREATE USER 'DBrFUpdate'@'localhost' IDENTIFIED BY 'aktualisierung';
+CREATE USER 'DBrFUpdate'@'localhost' IDENTIFIED BY 'Aktualisierung_123';
 # auf Tabelle Kontaktdaten
 GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.kontaktdaten TO 'DBrFUpdate'@'localhost';
 # auf Tabelle Adressen
@@ -398,7 +431,7 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.gatways TO 'DBrFUpdate'@'localho
 GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.sensoren TO 'DBrFUpdate'@'localhost';
 
 # auf AppliServer
-CREATE USER 'DBrFUpdate'@'AppliServer' IDENTIFIED BY 'aktualisierung';
+CREATE USER 'DBrFUpdate'@'AppliServer' IDENTIFIED BY 'Aktualisierung_123';
 # auf Tabelle Kontaktdaten
 GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.kontaktdaten TO 'DBrFUpdate'@'AppliServer';
 # auf Tabelle Adressen
@@ -414,14 +447,14 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.sensoren TO 'DBrFUpdate'@'AppliS
 
 # Benutzer: DBrFDatenadmin
 # auf Localhost
-CREATE USER 'DBrFDatenadmin'@'localhost' IDENTIFIED BY 'daten';
+CREATE USER 'DBrFDatenadmin'@'localhost' IDENTIFIED BY 'Daten_123';
 GRANT SELECT, INSERT, DELETE, UPDATE ON roehFix.* TO 'DBrFDatenadmin'@'localhost';
 
 
 
 # Benutzer: DBrFAdmin
 # auf Localhost
-CREATE USER 'DBrFAdmin'@'localhost' IDENTIFIED BY 'admin';
+CREATE USER 'DBrFAdmin'@'localhost' IDENTIFIED BY 'Admin_123';
 GRANT ALL PRIVILEGES ON roehFix.* TO 'DBrFAdmin'@'localhost';
 
 FLUSH PRIVILEGES;
@@ -530,6 +563,7 @@ sudo nano /var/www/roehfix/index.php
 
 <!DOCTYPE HTML>
 <html>
+
 <head>  
 <script>
 window.onload = function () {
@@ -608,6 +642,9 @@ sudo systemctl restart apache2
 http://your_server_ip
 ```
 
+<img width="100%" src='./bilder/Sensordaten.png'></img>
+
+<img width="70%" src='./bilder/selectSensor.png'></img>
 
 
 <br>
