@@ -338,12 +338,42 @@ GRANT ALL PRIVILEGES ON roehFix.* TO 'DBrFAdmin'@'localhost';
 
 #### 5.2.3 Zugriff getestet
 
+
+
+
 __Test 1: DBrFAbfrage__
 
 1. Mit User in Datenbank anmelden
+```Terminal
+mysql -u DBrFAbfrage -p roehFix
 ```
-mysql -u DBrFAbfrage -p roeFix
-```
+
+> [!TIP|style:flat]
+> __Berrechtigung vorhanden__
+>
+> Test 1: Select Befehl 
+> ```MYSQL
+> select * from sensoren;
+> ```
+>
+> <img width="100%" src='./bilder/JaAbfrage.png'></img>
+
+> [!ATTENTION|style:flat]
+> __Keine Berrechtigung__
+>
+> Test 1: Insert Befehl
+> ```MYSQL
+> insert into sensoren (kennung, laengeKoordination, breiteKoordination)
+> values ('djsJDj', 21231.32, 77777.7);
+> ```
+>
+> Test 2: Delete Befehl
+> ```MYSQL
+> delete from sensoren where sensorenID = 6;
+> ```
+>
+> <img width="100%" src='./bilder/NeinAbfrage.png'></img>
+
 
 <br>
 
@@ -351,8 +381,46 @@ __Test 2: DBrFUpdate__
 
 1. Mit User in Datenbank anmelden
 ```
-mysql -u DBrFUpdate -p roeFix
+mysql -u DBrFUpdate -p roehFix
 ```
+
+> [!TIP|style:flat]
+> __Berrechtigung vorhanden__
+>
+> Test 1: Insert Befehl
+> ```MYSQL
+> insert into sensoren (kennung, laengeKoordination, breiteKoordination)
+> values ('djsJDj', 21231.32, 77777.7);
+> ```
+>
+> Test 2: Delete Befehl
+> ```MYSQL
+> delete from sensoren where sensorenID = 6;
+> ```
+>
+>
+> <img width="100%" src='./bilder/JaUpdate.png'></img>
+
+> [!ATTENTION|style:flat]
+> __Keine Berrechtigung__
+>
+> Test 1: Select Befehl Typ
+> ```MYSQL
+> select * from typ;
+> ```
+>
+> Test 2: Creat Befehl
+> ```MYSQL
+> create table tblname (
+> id int not null,
+> column1 int (11),
+> column2 varchar (100)
+> );
+> ```
+>
+> <img width="100%" src='./bilder/NeinUpdate.png'></img>
+
+select current_user();
 
 <br>
 
@@ -361,9 +429,28 @@ __Test 3: DBrFAdmin__
 
 1. Mit User in Datenbank anmelden
 ```
-mysql -u DBrFAdmin -p roeFix
+mysql -u DBrFAdmin -p roehFix
 ```
 
+> [!TIP|style:flat]
+> __Berrechtigung vorhanden__
+>
+> Test 1: Create Befehl
+> ```MYSQL
+> create table tblname (
+> id int not null,
+> column1 int (11),
+> column2 varchar (100)
+> );
+> ```
+>
+> Test 2: Drop Befehl
+> ```MYSQL
+> drop table tblname;
+> ```
+>
+>
+> <img width="100%" src='./bilder/JaAdmin.png'></img>
 
 <br>
 <br>
@@ -648,6 +735,7 @@ http://your_server_ip
 
 
 <br>
+
 <br>
 <br>
 <br>
