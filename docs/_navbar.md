@@ -1,6 +1,5 @@
 * [Home](/)
 * [Projektarbeit](/projektarbeit/)
-* [Installation & Konfiguration](/installation/)
 * [LB2](/lb2/)
 * [LB3](/lb3/)
 * [Lerndokumentation](/lerndokumentation/)
