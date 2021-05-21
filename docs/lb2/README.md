@@ -13,6 +13,6 @@ Jede/r Lernende...
 * LZ 7: ...kann die Datentypen von MySQL anwenden
 * LZ 8: ...kann aus einem ERD eine Datenbank implementieren (MySQL-Script)
 * LZ 9: ...kennt die Indexierungsarten von MySQL
-* LZ 10: ...kann in einem ERD die relevanten Attribute für eine Indexierung identifizieren
+* LZ 9: ...kann in einem ERD die relevanten Attribute für eine Indexierung identifizieren
 * LZ 10: ...kann SQL-Scripts importieren und exportieren über die Konsole
 * LZ 11: ...kann CSV-Dateien importieren und Daten in CSV-Dateien exportieren

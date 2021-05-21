@@ -7,4 +7,7 @@ Gesamtes Log-File
 nano  /var/log/mysql/error.log
 ```
 
-nano  /var/log/mysql/error.log
+Ein Teil von Log-File anzeigen:
+```Terminal
+tail -f /var/log/mysql/error.log 
+```
