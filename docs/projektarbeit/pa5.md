@@ -640,7 +640,7 @@ sudo nano /var/www/roehfix/index.php
 <?php
 
     $conn = mysqli_connect('localhost','root','Admin_123','roehFix');
-    $sql = "SELECT kennung, laengeKoordination, breiteKoordination FROM sensoren ;
+    $sql = "SELECT kennung, laengeKoordination, breiteKoordination FROM sensoren";
     $result = mysqli_query($conn, $sql);
     while($row = mysqli_fetch_assoc($result))
     {
