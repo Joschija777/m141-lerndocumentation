@@ -171,6 +171,47 @@ ENGINE = InnoDB;
 
 ```
 
+```SQL
+
+CREATE DATABASE IF NOT EXISTS dbPerProJG DEFAULT CHARACTER SET utf8 ;
+USE dbPerProJG ;
+
+
+CREATE TABLE IF NOT EXISTS dbPerProJG.tblPerson (
+  perIDJG INT NOT NULL AUTO_INCREMENT,
+  perNameJG VARCHAR(18) NOT NULL,
+  abtIDJG INT,
+  PRIMARY KEY (perIDJG),
+  FOREIGN KEY (abtIDJG) REFERENCES dbPerProJG.tblAbteilungJG(abtIDJG))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS dbPerProJG.tblAbteilung (
+  abtIDJG INT NOT NULL AUTO_INCREMENT,
+  abtNameJG VARCHAR(25) NOT NULL,
+  PRIMARY KEY (abtIDJG))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS dbPerProJG.tblProJG (
+  proIDJG INT NOT NULL AUTO_INCREMENT,
+  proNameJG VARCHAR(18) NOT NULL,
+  proStdJG INT,
+  PRIMARY KEY (perIDJG))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS dbPerProJG.perHasAbt (
+  perPerID INT NOT NULL,
+  proProID INT NOT NULL,
+  PRIMARY KEY (perPerID, proProID),
+  FOREIGN KEY (perPerID) REFERENCES dbPerProJG.gatways(gatwaysID),
+  FOREIGN KEY (proProID) REFERENCES dbPerProJG.sensoren(sensorenID),
+  UNIQUE KEY unique_proProID (proProID ASC),
+  UNIQUE KEY unique_perPerID (perPerID ASC)
+  )
+ENGINE = InnoDB;
+
+
+```
+
 <br>
 <br>
 
