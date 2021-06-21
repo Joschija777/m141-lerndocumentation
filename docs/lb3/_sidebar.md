@@ -1,11 +1,2 @@
-* [LZ 1:  Tabelle konfigurieren (Storage Engine)](lb2/lz1.md)
-* [LZ 2:  Benutzer Berrechtigungen](lb2/lz2.md)
-* [LZ 3:  Berrechtigungen anzeigen](lb2/lz3.md)
-* [LZ 4:  DBMS konfigurienen (Config)](lb2/lz4.md)
-* [LZ 5:  Log-Files](lb2/lz5.md)
-* [LZ 6:  ERD entwickeln](lb2/lz6.md)
-* [LZ 7:  Datentypen anwenden](lb2/lz7.md)
-* [LZ 8:  MySQL-Script (ERD)](lb2/lz8.md)
-* [LZ 9:  Indexierungsarten](lb2/lz9.md)
-* [LZ 10:  SQL Scripts importieren & exportiern](lb2/lz10.md)
-* [LZ 11:  CSV Dateien importieren & exportiern](lb2/lz11.md)
+* [Fragen](lb3/lz1.md)
+
