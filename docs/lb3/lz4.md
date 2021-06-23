@@ -1,194 +1,125 @@
-# DBMS konfigurienen (Betrieb & Config)
+# Backup
 
-## Benutzer
 
-__Anzeigen:__
 
-```mysql
-use mysql;
-select user,host,authentication_string from user;
+##### warm, logisch & full
+
+in Datei exportieren
+```sql
+mysqldump --single-transaction -u root -p --all-databases > dump.sql
 ```
 
-<br>
-
-__Passwort ändern:__
-
-- Terminal
-```Terminal
-mysqladmin -u'dein-user' -p'dein-altes-passwort' password 'dein-neues-passwort'
-```
-
-- MYSQL
-```SQL
-update user set password=PASSWORD('dein-neues-passwort') where User='dein-user';
-```
-```Mysql
-flush privileges;
-```
-
-quit
-
-
-<br>
-
-## Root
-
-__Anmelden:__
-
-- Anmelden ohne DB
-```Terminal
-mysql -u root -p
-```
-
-- Anmelden direkt in DB
-```mysql
-mysql -u root -p roehFix
-```
-
-<br>
-
-__Passwort:__
-
--  Wenn root noch kein Passwort hat
-```Terminal
-mysqladmin -u root password Admin_123
-```
-
-- Wenn root schon ein Passwort hat
-```mysql
-mysqladmin -u root -p ALTESPASSWORT NEUESPASSWORT
+importieren
+```sql
+mysql -u root -p < dump.sql
 ```
 
 <br>
 <br>
 
-## MYSQL Config
+##  Übung 1 - Lokales Backup
 
-- Anzeige der aktuellen Werte
-```mysql
-SHOW VARIABLES;
+Richten Sie auf Ihrem Server ein Backup-Script, gemäss der Vorlage von oben, ein. Testen Sie das Script aus ob der Export funktioniert und Sie die Daten auch wieder importieren können ("Niemand will Backup - alle wollen restore")
+
+```terminal
+sudo nano test.sh
 ```
 
-- Zeige alles an was irgendwie mit "size" heisst
-```mysql
-SHOW VARIABLES LIKE '%size%';
+```bash
+#!/bin/bash
+# Add the backup dir location, MySQL root password, MySQL and mysqldump location
+DATE=$(date +%d-%m-%Y)
+BACKUP_DIR="/tmp/test-backup"
+MYSQLroot='root'
+MYSQL_PASSWORD='Admin_123'
+MYSQL=/usr/bin/mysql
+MYSQLDUMP=/usr/bin/mysqldump
+
+# To create a new directory in the backup directory location based on the date
+mkdir -p $BACKUP_DIR/$DATE
+
+# To get a list of databases
+databases=`$MYSQL -u$MYSQL_USER -p$MYSQL_PASSWORD -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema)"`
+
+# To dump each database in a separate file
+for db in $databases; do
+echo $db
+$MYSQLDUMP --single-transaction --force --opt --skip-lock-tables --user=$MYSQL_USER -p$MYSQL_PASSWORD --databases $db | gzip > "$BACKUP_DIR/$DATE/$db.sql.gz"
+done
+
+# Delete the files older than 10 days
+find $BACKUP_DIR/* -mtime +10 -exec rm {} \;
 ```
 
-- Status Variablen Global
-```mysql
-SHOW GLOBAL STATUS;
 ```
-
-- Status Variablen für Sessions
-```mysql
-SHOW SESSION STATUS;
+bash test.sh
 ```
 
 <br>
 <br>
 
-## Allgemein Config-File
 
-File Name | Purpose  
-:-------- | :---------- 
-/etc/my.cnf |   Global options
-/etc/mysql/my.cnf   |   Global options
-SYSCONFDIR/my.cnf   |   Global options
-$MYSQL_HOME/my.cnf  |   Server-specific options (server only)
-defaults-extra-file |   The file specified with --defaults-extra-file, if any
-~/.my.cnf   |   User-specific options
-~/.mylogin.cnf  |   User-specific login path options (clients only)
-DATADIR/mysqld-auto.cnf |   System variables persisted with SET PERSIST or SE PERSIST_ONLY (server only)
+##  Übung 4 - Migration auf entfernten Server#
 
+Vorbereitung:
 
-> [!TIP|style:flat]
-> Für Sie ist folgende Datei relevant
-> /etc/mysql/mysql.conf.d/mysqld.cnf
+1. Erstellen Sie einen Klon Ihrer MySQL-VM mit neuen MAC-Adressen
+2. Verbinden Sie die orginale VM mit der geklonten VM in einem NAT-Network <- Testen Sie die Verbindung untereinander
+3. Testen Sie die SSH-Verbindung zwischen den VMs
 
-
-<br>
-<br>
-
-## Netzwerkkonfiguration DBMS-Server
-
-```Terminal
-sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
-```
-
-```mysqld.cnf
-# * Basic Settings
-#
-user            = mysql
-# pid-file      = /var/run/mysqld/mysqld.pid
-# socket        = /var/run/mysqld/mysqld.sock
-# port          = 3306
-# datadir       = /var/lib/mysql
-
-
-# If MySQL is running as a replication slave, this should be
-# changed. Ref https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_tmpdir
-# tmpdir                = /tmp
-#
-# Instead of skip-networking the default is now to listen only on
-# localhost which is more compatible and is not less secure.
-bind-address            = 127.0.0.1
-mysqlx-bind-address     = 127.0.0.1
-#
-# * Fine Tuning
-#
-key_buffer_size         = 16M
-# max_allowed_packet    = 64M
-# thread_stack          = 256K
-
-# thread_cache_size       = -1
-
-# This replaces the startup script and checks MyISAM tables if needed
-# the first time they are touched
-myisam-recover-options  = BACKUP
-
-# Error log - should be very few entries.
-#
-log_error = /var/log/mysql/error.log
-#
-# Here you can see queries with especially long duration
-# slow_query_log                = 1
-# slow_query_log_file   = /var/log/mysql/mysql-slow.log
-# long_query_time = 2
-# log-queries-not-using-indexes
+Verbindung ssh zu 192.168.10.4
 
 ```
-
-> [!TIP|style:flat]
-> - log_error:
->   - Pfad der Log-Datei für Fehler
-> 
-> - datadir:
->   - Verzeichnis, in der die Daten gespeichert werden
->
-> - bind_address:
->   - Defaultmässig auf 127.0.0.1 - das bedeutet, dass man nicht aus dem Netzwerk auf den Server zugreifen kann. Um auf allen Interfaces zu hören, muss diese Einstellung auf 0.0.0.0 gesetzt werden.
-> 
-> - port:
->   - er Default-Port von MySQL ist 3306.
-
-<br>
-<br>
-
-## Server-Betrieb (langsame Abfragen)
-
-
-1. Configfile öffnen
-```Terminal
-sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+ssh vagrant@192.168.10.4
 ```
 
-2. slow_query_log_file & slow_query_log auskommentieren und den Wert(1) bei low_query_log reinschreiben
-```mysqld.cnf
-# Here you can see queries with especially long duration
-slow_query_log                = 1
-slow_query_log_file   = /var/log/mysql/mysql-slow.log
-# long_query_time = 2
-# log-queries-not-using-indexes
 ```
-> [!NOTE|style:flat]
-> Im langsamen MySQL-Abfrageprotokoll registriert der MySQL- Datenbankserver alle Abfragen , die einen bestimmten Schwellenwert für die Ausführungszeit überschreiten. Dies kann oft ein guter Ausgangspunkt sein, um zu sehen, welche Abfragen am langsamsten und wie oft sie langsam sind
+apt-get install openssh-server openssh-client
+```
+
+<br>
+
+
+Auftrag
+
+Führen Sie einen entfernten Backup mittels SSH, gemäss den Anleitung von oben, durch. Nutzen Sie das Beispiel "Verbindung zwischen den Servern per SSH möglich".
+
+Schrittweises Vorgehen:
+
+1. SSH auf den Export-Server
+2. Dump durchführen und Ausabe auf PIPE umleiten
+3. die PIPE umleiten auf die SSH-Verbindung zum Import-Server
+
+
+Version : Keine direkte Verbindung zwischen den Servern, der Datentraffic muss über den Laptop umgeleitet werden
+
+```
+ssh user@SERVER1 'mysqldump --single-transaction -u root -pPASS DBNAME' | ssh user@SERVER2 'mysql -u USER -pPASS NEWDB'
+```
+
+
+```
+ssh vagrant@192.168.10.4 'mysqldump --single-transaction -u root -pAdmin_123 roehFix | gzip -9' | ssh vagrant@192.168.10.5 'gunzip | mysql -uroot -pAdmin_123 NewRoehfix'
+```
+
+
+
+
+mysqldump --single-transaction -uroot -pAdmin_123 roehFix -h localhost \ | mysql -uroot -pAdmin_123 -h 192.168.10.4 newRoehFix
+
+
+
+## Migration import, dump
+
+```
+# Dump erstellen und direkt zippen
+mysqldump --single-transaction -u root -p DB | gzip -9 > /tmp/DUMP_DB.sql.gz
+
+# Files auf einen anderen Server kopieren, meistens über SSH
+scp /tmp/DUMP_DB.sql.gz root@ANDERERSERVERIP:/tmp/
+
+# Auf dem Zielserver neue NEUEDB erstellen
+
+# Direktes Entzippen und importieren
+gunzip < DUMP_DB.sql.gz | mysql -u root -p NEUEDB
+```
